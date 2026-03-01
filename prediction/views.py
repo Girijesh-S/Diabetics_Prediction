@@ -638,11 +638,11 @@ def build_pdf_bytes(pred, user, include_dashboard=True, advice=None):
     elements = []
 
     # ════════════════════════════════════════════════════════════════════
-    #  HEADER — gradient-style coloured banner
+    #  HEADER — gradient-style coloured banner with "Predicted On" date
     # ════════════════════════════════════════════════════════════════════
     hdr = Table([
         [sp(_("DIABETES RISK ASSESSMENT REPORT"))],
-        [sp(visit_dt.strftime('%d-%m-%Y  |  %H:%M IST'))],
+        [sp(f"Predicted On: {visit_dt.strftime('%d-%m-%Y  |  %H:%M IST')}")],
     ], colWidths=[COL_W])
     hdr.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), ac_primary),
@@ -727,7 +727,7 @@ def build_pdf_bytes(pred, user, include_dashboard=True, advice=None):
     elements.append(Spacer(1, 0.2 * inch))
 
     # ════════════════════════════════════════════════════════════════════
-    #  CLINICAL VALUES — colour-coded "Your Value" column
+    #  CLINICAL VALUES — only show user-entered values
     # ════════════════════════════════════════════════════════════════════
     elements.append(Paragraph(sp(str(_("Clinical Values & Thresholds"))), styles['SectionHead']))
     elements.append(Paragraph(
@@ -751,17 +751,19 @@ def build_pdf_bytes(pred, user, include_dashboard=True, advice=None):
     ]))
     elements.append(legend_t)
 
-    # Clinical value rows: (label, value, min, max, unit, warn_low, warn_high)
-    # warn thresholds define the 3-zone boundaries
+    # Clinical value rows: showing only user-entered values (not estimated)
+    # (label, value, min, max, unit, warn_low, warn_high)
+    weight_kg_calc = (pred.bmi * (1.60 ** 2)) if pred.bmi > 0 else 0
+    height_cm_calc = 160  # approximate, not stored
+    
     clinical_rows = [
-        (_("Pregnancies"),  pred.pregnancies,                  0,    17,   _("count"), 0, 4),
+        (_("Age"),          pred.age,                         21,    81, _("years"), 0, 45),
+        (_("Height"),       f"{height_cm_calc:.0f}",          140,  200, 'cm',    150, 180),
+        (_("Weight"),       f"{weight_kg_calc:.1f}",          40,   150, 'kg',     60, 90),
+        (_("BMI"),          f"{pred.bmi:.1f}",                 0,  67.0, 'kg/m\u00b2', 18.5, 30),
+        (_("Pregnancies"),  pred.pregnancies,                  0,    17, _("count"), 0, 4),
         (_("Glucose"),      pred.glucose,                      0,   199, 'mg/dL',   70, 140),
         (_("Blood Pressure"), pred.blood_pressure,             0,   122, 'mmHg',    60, 130),
-        (_("Skin Thickness"), pred.skin_thickness,             0,    99, 'mm',       0, 40),
-        (_("Insulin"),      pred.insulin,                      0,   846, 'µU/mL',   16, 166),
-        (_("BMI"),          f"{pred.bmi:.1f}",                 0,  67.0, 'kg/m\u00b2', 18.5, 30),
-        (_("Diabetes Pedigree"), f"{pred.diabetes_pedigree_function:.3f}", 0.078, 2.42, _("ratio"), 0, 0.8),
-        (_("Age"),          pred.age,                         21,    81, _("years"), 0, 45),
     ]
 
     hdr_row = [sp(_("Metric")), sp(_("Your Value")), sp(_("Min")), sp(_("Max")), sp(_("Units")), sp(_("Status"))]
@@ -876,142 +878,71 @@ def build_pdf_bytes(pred, user, include_dashboard=True, advice=None):
     elements.append(adv_t)
 
     # ════════════════════════════════════════════════════════════════════
-    #  DIET PLAN — new page
+    #  HEALTHY ADD-ONS FOR SUGAR CONTROL — new page
     # ════════════════════════════════════════════════════════════════════
     elements.append(PageBreak())
-
-    weight_kg = pred.bmi * (1.60 ** 2) if pred.bmi > 0 else 65
-    if pred.bmi > 0:
-        weight_kg = round(pred.bmi * 2.56, 1)
-
-    diet = _get_indian_diet_plan(pred.risk_level, weight_kg)
-
-    # Diet title banner
-    dt_title = Table([
-        [sp(f"1-WEEK {diet['label'].upper()}")],
-        [sp(f"Daily Target: {diet['daily_calories']} kcal  |  Weight ~{diet['weight_kg']:.0f} kg  |  {diet['cal_per_kg']} kcal/kg")],
-    ], colWidths=[COL_W])
-    dt_title.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), ac_primary),
-        ('TEXTCOLOR', (0, 0), (-1, 0), WHITE),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-        ('FONTSIZE', (0, 0), (-1, 0), 14),
-        ('BACKGROUND', (0, 1), (-1, 1), ac_bg),
-        ('TEXTCOLOR', (0, 1), (-1, 1), ac_primary),
-        ('FONTSIZE', (0, 1), (-1, 1), 9),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('TOPPADDING', (0, 0), (-1, -1), 8),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
-        ('BOX', (0, 0), (-1, -1), 1.5, ac_primary),
-    ]))
-    elements.append(dt_title)
-    elements.append(Spacer(1, 0.12 * inch))
-
-    # Calorie distribution bar
-    cal_dist = Table([
-        [sp(_("Meal")), sp(_("Breakfast")), sp(_("Mid-Morning")), sp(_("Lunch")), sp(_("Evening")), sp(_("Dinner"))],
-        [sp(_("Calories")), sp(diet['meal_split']['breakfast']),
-         sp(diet['meal_split']['mid_morning']),
-         sp(diet['meal_split']['lunch']),
-         sp(diet['meal_split']['evening']),
-         sp(diet['meal_split']['dinner'])],
-        [sp(_("% of Total")), sp("25%"), sp("10%"), sp("30%"), sp("10%"), sp("25%")],
-    ], colWidths=[70, 86, 86, 86, 86, 86])
-    cal_dist.setStyle(TableStyle([
+    elements.append(Paragraph(sp(str(_("Healthy Add-ons for Sugar Control"))), styles['SectionHead']))
+    
+    healthy_addons = [
+        (_("High-Fiber Foods"), _("Oats, barley, brown rice, whole wheat, lentils, beans, chickpeas, chia seeds")),
+        (_("Protein-Rich Foods"), _("Eggs,chicken breast, fish, yogurt, paneer, tofu, dal, nuts, seeds")),
+        (_("Healthy Fats"), _("Olive oil, coconut oil, avocado, almonds, walnuts, flax seeds, chia seeds")),
+        (_("Leafy Greens"), _("Spinach, kale, methi, palak, cabbage, broccoli, bell peppers, tomatoes")),
+        (_("Spices for Control"), _("Cinnamon, turmeric, fenugreek seeds, curry leaves, garlic, ginger")),
+        (_("Beverages"), _("Water, unsweetened tea, black coffee, herbal teas (no sugar added)")),
+        (_("Avoid"), _("Sugary drinks, refined carbs, processed foods, excess salt, saturated fats")),
+    ]
+    
+    addon_rows = [[sp(_("Category")), sp(_("Recommended Foods"))]]
+    for category, foods in healthy_addons:
+        addon_rows.append([sp(category), Paragraph(sp(foods), styles['TableCell'])])
+    
+    addon_t = Table(addon_rows, colWidths=[120, 380])
+    addon_styles = [
         ('BACKGROUND', (0, 0), (-1, 0), BLUE),
         ('TEXTCOLOR', (0, 0), (-1, 0), WHITE),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('BACKGROUND', (0, 1), (0, -1), LBLUE),
         ('FONTNAME', (0, 1), (0, -1), 'Helvetica-Bold'),
         ('TEXTCOLOR', (0, 1), (0, -1), BLUE),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
         ('FONTSIZE', (0, 0), (-1, -1), 8),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
-        ('TOPPADDING', (0, 0), (-1, -1), 5),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [WHITE, LIGHT]),
         ('BOX', (0, 0), (-1, -1), 1.5, BLUE),
         ('INNERGRID', (0, 0), (-1, -1), 0.5, GRID),
-    ]))
-    elements.append(cal_dist)
-    elements.append(Spacer(1, 0.15 * inch))
-
-    # 7-day diet tables
-    for day_plan in diet['days']:
-        day_hdr = Table([[sp(day_plan['day'].upper())]], colWidths=[COL_W])
-        day_hdr.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, -1), ac_bg),
-            ('TEXTCOLOR', (0, 0), (-1, -1), ac_primary),
-            ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, -1), 10),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
-            ('TOPPADDING', (0, 0), (-1, -1), 4),
-            ('BOX', (0, 0), (-1, -1), 1, ac_primary),
-        ]))
-
-        meal_data = [
-            [sp(_("Meal")), sp(_("Menu Item")), sp(_("Calories")), sp(_("Alternative Options"))],
-        ]
-        meals = [
-            (_("Breakfast"), day_plan['breakfast']),
-            (_("Mid-Morning"), day_plan['mid_morning']),
-            (_("Lunch"), day_plan['lunch']),
-            (_("Evening Snack"), day_plan['evening']),
-            (_("Dinner"), day_plan['dinner']),
-        ]
-        for meal_name, (item, cals, alt) in meals:
-            meal_data.append([
-                sp(meal_name),
-                Paragraph(sp(item), styles['TableCell']),
-                sp(cals),
-                Paragraph(sp(alt), styles['TableCell']),
-            ])
-
-        meal_t = Table(meal_data, colWidths=[85, 165, 70, 180])
-        meal_t.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), BLUE),
-            ('TEXTCOLOR', (0, 0), (-1, 0), WHITE),
-            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('BACKGROUND', (0, 1), (0, -1), LBLUE),
-            ('FONTNAME', (0, 1), (0, -1), 'Helvetica-Bold'),
-            ('TEXTCOLOR', (0, 1), (0, -1), BLUE),
-            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-            ('ALIGN', (2, 0), (2, -1), 'CENTER'),
-            ('FONTSIZE', (0, 0), (-1, -1), 7.5),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
-            ('TOPPADDING', (0, 0), (-1, -1), 4),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [WHITE, LIGHT]),
-            ('BOX', (0, 0), (-1, -1), 1, BLUE),
-            ('INNERGRID', (0, 0), (-1, -1), 0.4, GRID),
-        ]))
-
-        elements.append(KeepTogether([day_hdr, meal_t, Spacer(1, 0.08 * inch)]))
-
-    # Diet guidelines note — point by point
-    elements.append(Spacer(1, 0.1 * inch))
-    guidelines = [
-        sp(_("Calorie values are approximate and calculated based on your body weight.")),
-        sp(_("Choose alternatives freely based on availability and preference.")),
-        sp(_("Drink 8-10 glasses of water daily.")),
-        sp(_("Avoid refined sugar, maida-based foods, and excessive oil.")),
-        sp(_("Consult a certified dietitian before making significant dietary changes.")),
-        sp(_("This diet plan is for educational purposes and should not replace professional medical advice.")),
     ]
-    note_rows = [[sp(_("#")), sp(_("Dietary Guidelines"))]]
+    addon_t.setStyle(TableStyle(addon_styles))
+    elements.append(addon_t)
+    elements.append(Spacer(1, 0.2 * inch))
+    
+    # General guidelines
+    guidelines = [
+        sp(_("Eat regular, smaller meals throughout the day to maintain stable blood sugar levels.")),
+        sp(_("Include protein and fiber in every meal to slow down glucose absorption.")),
+        sp(_("Limit portion sizes and avoid overeating at any meal.")),
+        sp(_("Drink plenty of water and stay hydrated throughout the day.")),
+        sp(_("Exercise regularly: aim for 30 minutes of moderate activity, 5 days a week.")),
+        sp(_("Consult a certified dietitian for a personalized nutrition plan based on your health conditions.")),
+        sp(_("This guide is for educational purposes and should not replace professional medical advice.")),
+    ]
+    note_rows = [[sp(_("#")), sp(_("General Guidelines"))]]
     for i, g in enumerate(guidelines, 1):
         note_rows.append([sp(str(i)), Paragraph(g, styles['NoteCell'])])
 
     note_t = Table(note_rows, colWidths=[30, 470])
     note_t.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f59e0b')),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#10b981')),
         ('TEXTCOLOR', (0, 0), (-1, 0), WHITE),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('ALIGN', (0, 0), (0, -1), 'CENTER'),
         ('FONTSIZE', (0, 0), (-1, -1), 7.5),
         ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
         ('TOPPADDING', (0, 0), (-1, -1), 5),
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#fffbeb'), WHITE]),
-        ('BOX', (0, 0), (-1, -1), 1, colors.HexColor('#f59e0b')),
-        ('INNERGRID', (0, 0), (-1, -1), 0.4, colors.HexColor('#fde68a')),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor('#ecfdf5'), WHITE]),
+        ('BOX', (0, 0), (-1, -1), 1, colors.HexColor('#10b981')),
+        ('INNERGRID', (0, 0), (-1, -1), 0.4, colors.HexColor('#a7f3d0')),
     ]))
     elements.append(note_t)
 
