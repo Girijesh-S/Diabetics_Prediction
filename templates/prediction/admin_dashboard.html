@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Admin Dashboard" %}{% endblock %}
+{% block extra_css %}
+<style>
+    .admin-stat-card {
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+    .admin-stat-card:hover { transform: translateY(-3px); }
+    .stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .tag-prediction { background: #e7f0ff; color: #1b6ef3; }
+    .tag-survey { background: #e8f7ef; color: #1f9d68; }
+    .tag-badge { border-radius: 999px; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; }
+    .filter-btn.active { box-shadow: 0 0 0 2px var(--primary); }
+    .table-admin th { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .table-admin td { vertical-align: middle; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3><i class="bi bi-shield-lock text-primary"></i> {% trans "Admin Dashboard" %}</h3>
+        <p class="text-muted mb-0">{% trans "View all user predictions and survey responses" %}</p>
+    </div>
+    <div class="d-flex gap-2 flex-wrap">
+        <a href="?filter=all" class="btn btn-sm {% if filter == 'all' %}btn-primary{% else %}btn-outline-primary{% endif %}">
+            {% trans "All" %} <span class="badge bg-white text-dark">{{ total_predictions|add:total_surveys }}</span>
+        </a>
+        <a href="?filter=prediction" class="btn btn-sm {% if filter == 'prediction' %}btn-primary{% else %}btn-outline-primary{% endif %}">
+            <i class="bi bi-cpu"></i> {% trans "Predictions" %} <span class="badge bg-white text-dark">{{ total_predictions }}</span>
+        </a>
+        <a href="?filter=logged_in" class="btn btn-sm {% if filter == 'logged_in' %}btn-info{% else %}btn-outline-info{% endif %}">
+            <i class="bi bi-person-check"></i> {% trans "Logged-in" %} <span class="badge bg-white text-dark">{{ loggedin_pred_count }}</span>
+        </a>
+        <a href="?filter=anonymous" class="btn btn-sm {% if filter == 'anonymous' %}btn-secondary{% else %}btn-outline-secondary{% endif %}">
+            <i class="bi bi-incognito"></i> {% trans "Anonymous" %} <span class="badge bg-white text-dark">{{ anonymous_pred_count }}</span>
+        </a>
+        <a href="?filter=survey" class="btn btn-sm {% if filter == 'survey' %}btn-success{% else %}btn-outline-success{% endif %}">
+            <i class="bi bi-clipboard2-pulse"></i> {% trans "Surveys" %} <span class="badge bg-white text-dark">{{ total_surveys }}</span>
+        </a>
+    </div>
+</div>
+
+<!-- Stats Row -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3 col-sm-6">
+        <div class="card admin-stat-card" style="background: linear-gradient(135deg, #e7f0ff, #d0e1ff);">
+            <div class="stat-icon text-primary"><i class="bi bi-people"></i></div>
+            <div class="display-6 fw-bold text-primary">{{ total_predictions }}</div>
+            <small class="text-muted">{% trans "Total Predictions" %}</small>
+            <div class="mt-2 d-flex justify-content-center gap-2">
+                <span class="badge bg-danger">{% trans "Diabetic" %}: {{ diabetic_pred_count }}</span>
+                <span class="badge bg-success">{% trans "Non-Diabetic" %}: {{ non_diabetic_pred_count }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card admin-stat-card" style="background: linear-gradient(135deg, #e8f7ef, #c8ebd8);">
+            <div class="stat-icon text-success"><i class="bi bi-clipboard2-data"></i></div>
+            <div class="display-6 fw-bold text-success">{{ total_surveys }}</div>
+            <small class="text-muted">{% trans "Survey Responses" %}</small>
+            <div class="mt-2 d-flex justify-content-center gap-2">
+                <span class="badge bg-danger">{% trans "Diabetes" %}: {{ diabetes_survey_count }}</span>
+                <span class="badge bg-success">{% trans "No Diabetes" %}: {{ no_diabetes_survey_count }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card admin-stat-card" style="background: linear-gradient(135deg, #ffe8eb, #ffd0d6);">
+            <div class="stat-icon text-danger"><i class="bi bi-exclamation-triangle"></i></div>
+            <div class="display-6 fw-bold text-danger">{{ high_risk_count }}</div>
+            <small class="text-muted">{% trans "High Risk Predictions" %}</small>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card admin-stat-card" style="background: linear-gradient(135deg, #e0f2fe, #b3e0ff);">
+            <div class="stat-icon text-info"><i class="bi bi-people-fill"></i></div>
+            <a href="/admin-dashboard/users/" class="text-decoration-none">
+                <div class="display-6 fw-bold text-info">{{ registered_user_count }}</div>
+                <small class="text-muted">{% trans "Registered Users" %} <i class="bi bi-arrow-right"></i></small>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Responses Table -->
+<div class="card">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="bi bi-table me-2"></i>{% trans "User Responses" %}</h5>
+        <div>
+            <form method="get" class="d-inline">
+                <input type="hidden" name="filter" value="{{ filter }}">
+                <div class="input-group input-group-sm" style="width: 250px;">
+                    <input type="text" class="form-control" name="search" value="{{ search_query }}" placeholder="{% trans 'Search by name...' %}">
+                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-admin mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>{% trans "Type" %}</th>
+                    <th>{% trans "User / Name" %}</th>
+                    <th>{% trans "Age" %}</th>
+                    <th>{% trans "Glucose" %}</th>
+                    <th>{% trans "BP" %}</th>
+                    <th>{% trans "Result / Outcome" %}</th>
+                    <th>{% trans "Date" %}</th>
+                    <th>{% trans "Details" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in responses %}
+                <tr>
+                    <td>
+                        {% if item.type == 'prediction' %}
+                        <span class="tag-badge tag-prediction"><i class="bi bi-cpu"></i> {% trans "Prediction" %}</span>
+                        {% if item.login_type == 'anonymous' %}
+                        <span class="tag-badge" style="background:#f1f5f9;color:#64748b;margin-left:4px;"><i class="bi bi-incognito"></i> {% trans "Anonymous" %}</span>
+                        {% else %}
+                        <span class="tag-badge" style="background:#e0f2fe;color:#0369a1;margin-left:4px;"><i class="bi bi-person-check"></i> {% trans "Logged-in" %}</span>
+                        {% endif %}
+                        {% else %}
+                        <span class="tag-badge tag-survey"><i class="bi bi-clipboard2-pulse"></i> {% trans "Survey" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ item.name }}</strong>
+                        {% if item.username %}<br><small class="text-muted">@{{ item.username }}</small>{% endif %}
+                    </td>
+                    <td>{{ item.age }}</td>
+                    <td>{{ item.glucose }} <small class="text-muted">mg/dL</small></td>
+                    <td>{{ item.bp }} <small class="text-muted">mmHg</small></td>
+                    <td>
+                        {% if item.type == 'prediction' %}
+                            <span class="badge bg-{% if item.result == 'Diabetic' %}danger{% else %}success{% endif %}">{{ item.result }}</span>
+                            <span class="risk-badge {% if item.risk == 'Low' %}risk-badge-low{% elif item.risk == 'Medium' %}risk-badge-medium{% else %}risk-badge-high{% endif %}">
+                                {{ item.risk }}
+                            </span>
+                        {% else %}
+                            {% if item.outcome == 1 %}
+                            <span class="badge bg-danger">{% trans "Diabetes" %}</span>
+                            {% else %}
+                            <span class="badge bg-success">{% trans "No Diabetes" %}</span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td><small>{{ item.date|date:"M d, Y H:i" }}</small></td>
+                    <td>
+                        {% if item.type == 'prediction' %}
+                        <span class="text-muted" title="Probability">{{ item.probability }}%</span>
+                        {% else %}
+                        <span class="text-muted" title="Height/Weight">{{ item.height }}cm / {{ item.weight }}kg</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="8" class="text-center text-muted py-4">{% trans "No responses found." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Pagination -->
+{% if responses %}
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <small class="text-muted">{% trans "Showing" %} {{ page_start }}-{{ page_end }} {% trans "of" %} {{ total_count }} {% trans "responses" %}</small>
+    <nav>
+        <ul class="pagination pagination-sm mb-0">
+            {% if has_prev %}
+            <li class="page-item"><a class="page-link" href="?filter={{ filter }}&search={{ search_query }}&page={{ prev_page }}">&laquo;</a></li>
+            {% endif %}
+            {% for p in page_range %}
+            <li class="page-item {% if p == current_page %}active{% endif %}"><a class="page-link" href="?filter={{ filter }}&search={{ search_query }}&page={{ p }}">{{ p }}</a></li>
+            {% endfor %}
+            {% if has_next %}
+            <li class="page-item"><a class="page-link" href="?filter={{ filter }}&search={{ search_query }}&page={{ next_page }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}
+{% endblock %}

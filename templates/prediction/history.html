@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "History" %}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3><i class="bi bi-clock-history"></i> {% trans "Prediction History" %}</h3>
+    <a href="/predict/" class="btn btn-primary">{% trans "New Prediction" %}</a>
+</div>
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>{% trans "Date" %}</th>
+                    <th>{% trans "Result" %}</th>
+                    <th>{% trans "Risk" %}</th>
+                    <th>{% trans "Probability" %}</th>
+                    <th>{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in predictions %}
+                <tr>
+                    <td>{{ p.predicted_at|date:"M d, Y H:i" }}</td>
+                    <td><span class="badge bg-{% if p.prediction_result == 'Diabetic' %}danger{% else %}success{% endif %}">{{ p.prediction_result }}</span></td>
+                    <td>
+                        <span class="risk-badge {% if p.risk_level == 'Low' %}risk-badge-low{% elif p.risk_level == 'Medium' %}risk-badge-medium{% else %}risk-badge-high{% endif %}">
+                            {{ p.risk_level }}
+                        </span>
+                    </td>
+                    <td>{% widthratio p.probability 1 100 %}%</td>
+                    <td>
+                        <a href="/report/{{ p.pk }}/pdf/" class="btn btn-sm btn-outline-primary" title="{% trans 'Download PDF' %}"><i class="bi bi-file-pdf"></i></a>
+                        <a href="/report/{{ p.pk }}/email/" class="btn btn-sm btn-outline-secondary" title="{% trans 'Email report' %}"><i class="bi bi-envelope"></i></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="text-center text-muted">{% trans "No predictions yet." %} <a href="/predict/">{% trans "Make your first prediction" %}</a></td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

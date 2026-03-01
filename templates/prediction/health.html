@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Health Check" %}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card p-4">
+            <h3 class="mb-3"><i class="bi bi-activity"></i> {% trans "System Health" %}</h3>
+            <div class="mb-4">
+                <h5>{% trans "Translations" %}</h5>
+                <ul class="list-group">
+                    {% for item in translation_status %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ item.name }} ({{ item.code }})</span>
+                        <span>
+                            {% if item.mo_exists and item.translated %}
+                            <span class="badge bg-success">{% trans "OK" %}</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">{% trans "Needs attention" %}</span>
+                            {% endif %}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="mb-4">
+                <h5>{% trans "PDF Report" %}</h5>
+                {% if pdf_ready %}
+                <span class="badge bg-success">{% trans "Ready" %}</span>
+                {% else %}
+                <span class="badge bg-danger">{% trans "Unavailable" %}</span>
+                {% endif %}
+            </div>
+            <div class="mb-2">
+                <h5>{% trans "Email" %}</h5>
+                <div class="small text-muted">{% trans "Backend" %}: {{ email_backend }}</div>
+                {% if email_backend == 'django.core.mail.backends.smtp.EmailBackend' %}
+                    {% if smtp_configured %}
+                    <span class="badge bg-success">{% trans "SMTP configured" %}</span>
+                    {% else %}
+                    <span class="badge bg-warning text-dark">{% trans "SMTP not configured" %}</span>
+                    {% endif %}
+                {% else %}
+                <span class="badge bg-secondary">{% trans "Console backend" %}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{{ target_user.username }} — {% trans "User History" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3><i class="bi bi-person-circle text-primary"></i> {{ target_user.username }}</h3>
+        <p class="text-muted mb-0">
+            {% if target_user.get_full_name %}{{ target_user.get_full_name }} &middot; {% endif %}
+            {{ target_user.email|default:"-" }} &middot;
+            {% trans "Joined" %}: {{ target_user.date_joined|date:"M d, Y" }}
+        </p>
+    </div>
+    <a href="/admin-dashboard/users/" class="btn btn-sm btn-outline-primary">
+        <i class="bi bi-arrow-left"></i> {% trans "All Users" %}
+    </a>
+</div>
+
+<!-- Quick Stats -->
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card text-center p-3" style="background: linear-gradient(135deg, #e7f0ff, #d0e1ff);">
+            <div class="display-6 fw-bold text-primary">{{ predictions|length }}</div>
+            <small class="text-muted">{% trans "Predictions" %}</small>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center p-3" style="background: linear-gradient(135deg, #e8f7ef, #c8ebd8);">
+            <div class="display-6 fw-bold text-success">{{ surveys|length }}</div>
+            <small class="text-muted">{% trans "Survey Responses" %}</small>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center p-3" style="background: linear-gradient(135deg, #f3e8ff, #e4d0ff);">
+            <div class="display-6 fw-bold text-purple">{{ target_user.last_login|date:"M d, Y H:i"|default:"-" }}</div>
+            <small class="text-muted">{% trans "Last Login" %}</small>
+        </div>
+    </div>
+</div>
+
+<!-- Prediction History -->
+{% if predictions %}
+<div class="card mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0"><i class="bi bi-cpu text-primary me-2"></i>{% trans "Prediction History" %}</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>{% trans "Date" %}</th>
+                    <th>{% trans "Age" %}</th>
+                    <th>{% trans "Glucose" %}</th>
+                    <th>{% trans "BP" %}</th>
+                    <th>{% trans "BMI" %}</th>
+                    <th>{% trans "Result" %}</th>
+                    <th>{% trans "Risk" %}</th>
+                    <th>{% trans "Probability" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in predictions %}
+                <tr>
+                    <td><small>{{ p.predicted_at|date:"M d, Y H:i" }}</small></td>
+                    <td>{{ p.age }}</td>
+                    <td>{{ p.glucose }} <small class="text-muted">mg/dL</small></td>
+                    <td>{{ p.blood_pressure }} <small class="text-muted">mmHg</small></td>
+                    <td>{{ p.bmi|floatformat:1 }}</td>
+                    <td><span class="badge bg-{% if p.prediction_result == 'Diabetic' %}danger{% else %}success{% endif %}">{{ p.prediction_result }}</span></td>
+                    <td>
+                        <span class="risk-badge {% if p.risk_level == 'Low' %}risk-badge-low{% elif p.risk_level == 'Medium' %}risk-badge-medium{% else %}risk-badge-high{% endif %}">
+                            {{ p.risk_level }}
+                        </span>
+                    </td>
+                    <td>{{ p.probability|floatformat:1 }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+<!-- Survey History -->
+{% if surveys %}
+<div class="card mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0"><i class="bi bi-clipboard2-pulse text-success me-2"></i>{% trans "Survey History" %}</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>{% trans "Date" %}</th>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Age" %}</th>
+                    <th>{% trans "Pregnancies" %}</th>
+                    <th>{% trans "Height" %}</th>
+                    <th>{% trans "Weight" %}</th>
+                    <th>{% trans "Glucose" %}</th>
+                    <th>{% trans "BP" %}</th>
+                    <th>{% trans "Outcome" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in surveys %}
+                <tr>
+                    <td><small>{{ s.date_recorded|date:"M d, Y H:i" }}</small></td>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.age }}</td>
+                    <td>{{ s.pregnancies }}</td>
+                    <td>{{ s.height }} cm</td>
+                    <td>{{ s.weight }} kg</td>
+                    <td>{{ s.glucose }} <small class="text-muted">mg/dL</small></td>
+                    <td>{{ s.blood_pressure }} <small class="text-muted">mmHg</small></td>
+                    <td>
+                        {% if s.outcome == 1 %}
+                        <span class="badge bg-danger">{% trans "Diabetes" %}</span>
+                        {% else %}
+                        <span class="badge bg-success">{% trans "No Diabetes" %}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+{% if not predictions and not surveys %}
+<div class="card p-5 text-center">
+    <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
+    <p class="text-muted mt-2">{% trans "No activity found for this user." %}</p>
+</div>
+{% endif %}
+{% endblock %}

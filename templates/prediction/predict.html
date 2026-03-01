@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Predict" %}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card soft-card p-4">
+            <div class="section-title">
+                <i class="bi bi-calculator"></i>
+                <div>
+                    <h3 class="mb-0">{% trans "Diabetes Risk Prediction" %}</h3>
+                    <div class="section-subtitle">{% trans "Speak a number and we will fill it automatically." %}</div>
+                </div>
+            </div>
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle me-2"></i>
+                <div>{% trans "Tip: Click the mic icon next to a field to start voice input for that field." %}</div>
+            </div>
+            <form method="post" id="predictForm">
+                {% csrf_token %}
+                <div class="row g-3">
+                    {% for field in form %}
+                    <div class="col-md-6">
+                        <label class="form-label">{{ field.label }}</label>
+                        <div class="input-group">
+                            {{ field }}
+                            <button type="button" class="btn btn-outline-secondary speech-btn" data-target="{{ field.id_for_label }}" title="{% trans 'Voice input' %}">
+                                <i class="bi bi-mic"></i>
+                            </button>
+                        </div>
+                        <small class="speech-preview" data-target="{{ field.id_for_label }}">{% trans "Speech input will appear here." %}</small>
+                        {% if field.errors %}<div class="text-danger small">{{ field.errors.0 }}</div>{% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-cpu"></i> {% trans "Get Prediction" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.speech-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const targetId = this.dataset.target;
+        const input = document.getElementById(targetId);
+        if (!input) {
+            return;
+        }
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            alert('{% trans "Speech recognition is not supported in your browser. Try Chrome." %}');
+            return;
+        }
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const rec = new SpeechRecognition();
+        rec.continuous = false;
+        rec.interimResults = true;
+        rec.maxAlternatives = 1;
+        const pageLang = (document.documentElement.lang || 'en').toLowerCase();
+        const langMap = { 'ta': 'ta-IN', 'hi': 'hi-IN', 'en': 'en-US' };
+        rec.lang = langMap[pageLang] || 'en-US';
+        const preview = document.querySelector(`.speech-preview[data-target="${targetId}"]`);
+        if (preview) {
+            preview.textContent = '{% trans "Listening..." %}';
+        }
+        rec.onresult = (e) => {
+            const last = e.results.length - 1;
+            const transcript = e.results[last][0].transcript;
+            const isFinal = e.results[last].isFinal;
+            
+            // Show interim results immediately
+            if (preview) {
+                preview.textContent = transcript + (isFinal ? '' : '...');
+            }
+            
+            // Only extract number and fill input on final result
+            if (isFinal) {
+                const num = transcript.replace(/[^0-9.]/g, '');
+                if (num) {
+                    input.value = num;
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                    input.focus();
+                }
+            }
+        };
+        rec.start();
+        this.querySelector('i').classList.remove('bi-mic');
+        this.querySelector('i').classList.add('bi-mic-fill');
+        rec.onend = () => {
+            this.querySelector('i').classList.remove('bi-mic-fill');
+            this.querySelector('i').classList.add('bi-mic');
+            if (preview && preview.textContent === '{% trans "Listening..." %}') {
+                preview.textContent = '{% trans "No speech detected." %}';
+            }
+        };
+    });
+});
+</script>
+{% endblock %}

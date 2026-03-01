@@ -1,0 +1,658 @@
+# Tamil translations for Diabetes Prediction
+# Copyright (C) 2025
+# This file is distributed under the same license as the Diabetes Prediction project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Tamil\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Diabetes Prediction"
+msgstr "நீரிழிவு கணிப்பு"
+
+msgid "Diabetes Risk Assessment"
+msgstr "நீரிழிவு ஆபத்து மதிப்பீடு"
+
+msgid "Diabetes Predict"
+msgstr "நீரிழிவு கணிப்பு"
+
+msgid "Home"
+msgstr "முகப்பு"
+
+msgid "Predict"
+msgstr "கணிக்கவும்"
+
+msgid "History"
+msgstr "வரலாறு"
+
+msgid "Dashboard"
+msgstr "டாஷ்போர்டு"
+
+msgid "Hello"
+msgstr "வணக்கம்"
+
+msgid "Logout"
+msgstr "வெளியேறு"
+
+msgid "Login"
+msgstr "உள்நுழை"
+
+msgid "Register"
+msgstr "பதிவு"
+
+msgid "Diabetes Prediction. For educational purposes. Consult a doctor for medical advice."
+msgstr "நீரிழிவு கணிப்பு. கல்வி நோக்கங்களுக்காக. மருத்துவ ஆலோசனைக்கு மருத்துவரைக் கலந்து கொள்ளுங்கள்."
+
+msgid "Prediction Result"
+msgstr "கணிப்பு முடிவு"
+
+msgid "Personalized Health Advice"
+msgstr "தனிப்பட்ட சுகாதார ஆலோசனை"
+
+msgid "Download PDF Report"
+msgstr "பி.டி.எஃப் அறிக்கை பதிவிறக்கு"
+
+msgid "Email Report"
+msgstr "மின்னஞ்சல் அறிக்கை"
+
+msgid "New Prediction"
+msgstr "புதிய கணிப்பு"
+
+msgid "View Dashboard"
+msgstr "டாஷ்போர்டு காண்க"
+
+msgid "Create Account"
+msgstr "கணக்கு உருவாக்கு"
+
+msgid "Password"
+msgstr "கடவுச்சொல்"
+
+msgid "Confirm Password"
+msgstr "கடவுச்சொல்லை உறுதிசெய்"
+
+msgid "Email"
+msgstr "மின்னஞ்சல்"
+
+msgid "Username"
+msgstr "பயனர் பெயர்"
+
+msgid "Start Prediction"
+msgstr "கணிப்பைத் தொடங்கு"
+
+msgid "Features"
+msgstr "அம்சங்கள்"
+
+msgid "Forgot password?"
+msgstr "கடவுச்சொல் மறந்துவிட்டீர்களா?"
+
+msgid "Don't have an account?"
+msgstr "கணக்கு இல்லையா?"
+
+msgid "Already have an account?"
+msgstr "ஏற்கனவே கணக்கு உள்ளதா?"
+
+msgid "Get an AI-powered prediction of your diabetes risk based on clinical parameters. Our stacking ensemble model achieves 91%+ accuracy."
+msgstr "மருத்துவ அளவுருக்களின் அடிப்படையில் உங்கள் நீரிழிவு ஆபத்தின் AI இயக்க கணிப்பைப் பெறுங்கள். எங்கள் மாதிரி 91%+ துல்லியத்தை அடைகிறது."
+
+msgid "91%+ Accurate ML Model"
+msgstr "91%+ துல்லியமான ML மாதிரி"
+
+msgid "Save & Track History"
+msgstr "வரலாற்றை சேமித்து கண்காணிக்கவும்"
+
+msgid "PDF Reports"
+msgstr "PDF அறிக்கைகள்"
+
+msgid "Voice Input"
+msgstr "குரல் உள்ளீடு"
+
+msgid "Multi-language (EN/Tamil/Hindi)"
+msgstr "பல மொழிகள் (EN/தமிழ்/இந்தி)"
+
+msgid "Diabetes Risk Prediction"
+msgstr "நீரிழிவு ஆபத்து கணிப்பு"
+
+msgid "Use the microphone button next to any field for voice input (speak the number)."
+msgstr "குரல் உள்ளீட்டிற்கு எந்த புலத்திற்கும் அருகிலுள்ள மைக்ரோஃபோன் பொத்தானைப் பயன்படுத்தவும் (எண்ணை பேசவும்)."
+
+msgid "Voice input"
+msgstr "குரல் உள்ளீடு"
+
+msgid "Get Prediction"
+msgstr "கணிப்பைப் பெறுக"
+
+msgid "Speech recognition is not supported in your browser. Try Chrome."
+msgstr "உங்கள் உலாவியில் குரல் அடையாளம் ஆதரிக்கப்படவில்லை. Chrome முயற்சிக்கவும்."
+
+msgid "Your Prediction Dashboard"
+msgstr "உங்கள் கணிப்பு டாஷ்போர்டு"
+
+msgid "Total Predictions"
+msgstr "மொத்த கணிப்புகள்"
+
+msgid "Risk Distribution"
+msgstr "ஆபத்து பகிர்வு"
+
+msgid "No data yet"
+msgstr "இன்னும் தரவு இல்லை"
+
+msgid "Quick Actions"
+msgstr "விரைவு செயல்கள்"
+
+msgid "View History"
+msgstr "வரலாறு காண்க"
+
+msgid "Recent Predictions Trend"
+msgstr "சமீபத்திய கணிப்பு போக்கு"
+
+msgid "Risk Level Distribution"
+msgstr "ஆபத்து நிலை பகிர்வு"
+
+msgid "Probability %"
+msgstr "சாத்தியம் %"
+
+msgid "Prediction History"
+msgstr "கணிப்பு வரலாறு"
+
+msgid "Date"
+msgstr "தேதி"
+
+msgid "Result"
+msgstr "முடிவு"
+
+msgid "Risk"
+msgstr "ஆபத்து"
+
+msgid "Probability"
+msgstr "சாத்தியம்"
+
+msgid "Actions"
+msgstr "செயல்கள்"
+
+msgid "Download PDF"
+msgstr "PDF பதிவிறக்கு"
+
+msgid "Email report"
+msgstr "மின்னஞ்சல் அறிக்கை"
+
+msgid "No predictions yet."
+msgstr "இன்னும் கணிப்புகள் இல்லை."
+
+msgid "Make your first prediction"
+msgstr "உங்கள் முதல் கணிப்பை செய்யுங்கள்"
+
+msgid "Pregnancies"
+msgstr "கர்ப்பங்களின் எண்ணிக்கை"
+
+msgid "Glucose"
+msgstr "குளுக்கோஸ்"
+
+msgid "Blood Pressure"
+msgstr "இரத்த அழுத்தம்"
+
+msgid "Skin Thickness"
+msgstr "தோல் தடிமன்"
+
+msgid "Insulin"
+msgstr "இன்சுலின்"
+
+msgid "BMI"
+msgstr "BMI"
+
+msgid "Diabetes Pedigree Function"
+msgstr "நீரிழிவு மரபியல் காரகம்"
+
+msgid "Age"
+msgstr "வயது"
+
+msgid "0-20 (Male: enter 0)"
+msgstr "0-20 (ஆண்: 0 உள்ளிடவும்)"
+
+msgid "Male: enter 0"
+msgstr "ஆண்: 0 உள்ளிடவும்"
+
+msgid "0-199 mg/dL"
+msgstr "0-199 mg/dL"
+
+msgid "0-122 mmHg"
+msgstr "0-122 mmHg"
+
+msgid "0-99 mm"
+msgstr "0-99 mm"
+
+msgid "0-846 mu U/ml"
+msgstr "0-846 mu U/ml"
+
+msgid "0-67 kg/m²"
+msgstr "0-67 kg/m²"
+
+msgid "0.078-2.42"
+msgstr "0.078-2.42"
+
+msgid "21-81 years"
+msgstr "21-81 ஆண்டுகள்"
+
+msgid "Email is not configured. Set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in .env."
+msgstr "மின்னஞ்சல் அமைக்கப்படவில்லை. .env இல் EMAIL_HOST_USER மற்றும் EMAIL_HOST_PASSWORD அமைக்கவும்."
+
+msgid "SMTP email failed. Report was printed to server logs using console backend."
+msgstr "SMTP மின்னஞ்சல் தோல்வியடைந்தது. அறிக்கை console backend மூலம் server logs-இல் அச்சிடப்பட்டது."
+
+msgid "Email backend is console. No email was sent. Configure SMTP in .env."
+msgstr "மின்னஞ்சல் backend console ஆக உள்ளது. மின்னஞ்சல் அனுப்பப்படவில்லை. .env இல் SMTP அமைக்கவும்."
+
+msgid "Report not found for this prediction."
+msgstr "இந்த கணிப்பிற்கான அறிக்கை கிடைக்கவில்லை."
+
+msgid "Invalid username or password."
+msgstr "தவறான பயனர் பெயர் அல்லது கடவுச்சொல்."
+
+msgid "Patient Information"
+msgstr "நோயாளர் தகவல்"
+
+msgid "Name"
+msgstr "பெயர்"
+
+msgid "Email ID"
+msgstr "மின்னஞ்சல் ஐடி"
+
+msgid "Not provided"
+msgstr "வழங்கப்படவில்லை"
+
+msgid "Username"
+msgstr "பயனர் பெயர்"
+
+msgid "Visit Date"
+msgstr "வருகை தேதி"
+
+msgid "Threshold Values"
+msgstr "வரம்பு மதிப்புகள்"
+
+msgid "Metric"
+msgstr "அளவுகோல்"
+
+msgid "Min"
+msgstr "குறைந்தபட்சம்"
+
+msgid "Max"
+msgstr "அதிகபட்சம்"
+
+msgid "Units"
+msgstr "அலகுகள்"
+
+msgid "Value"
+msgstr "மதிப்பு"
+
+msgid "Recommendation"
+msgstr "பரிந்துரை"
+
+msgid "count"
+msgstr "எண்ணிக்கை"
+
+msgid "ratio"
+msgstr "விகிதம்"
+
+msgid "years"
+msgstr "ஆண்டுகள்"
+
+msgid "Prediction"
+msgstr "கணிப்பு"
+
+msgid "Risk Level"
+msgstr "ஆபத்து நிலை"
+
+msgid "Report generated on: %(date)s"
+msgstr "அறிக்கை உருவாக்கப்பட்டது: %(date)s"
+
+msgid "Risk Badge"
+msgstr "ஆபத்து பேட்ஜ்"
+
+msgid "Get results in seconds with secure storage."
+msgstr "பாதுகாப்பான சேமிப்புடன் சில வினாடிகளில் முடிவுகளைப் பெறுங்கள்."
+
+msgid "Track trends, risks, and your latest insights."
+msgstr "போக்குகள், ஆபத்துகள் மற்றும் உங்கள் புதிய தகவல்களை கண்காணிக்கவும்."
+
+msgid "Updated"
+msgstr "புதுப்பிக்கப்பட்டது"
+
+msgid "Speak a number and we will fill it automatically."
+msgstr "ஒரு எண்ணை கூறுங்கள், அது தானாக நிரப்பப்படும்."
+
+msgid "Speech input will appear here."
+msgstr "குரல் உள்ளீடு இங்கே தோன்றும்."
+
+msgid "Listening..."
+msgstr "கேட்கிறது..."
+
+msgid "No speech detected."
+msgstr "குரல் கண்டறியப்படவில்லை."
+
+msgid "Reduce sugary drinks and refined carbs to help control glucose."
+msgstr "குளுக்கோஸை கட்டுப்படுத்த இனிப்பு பானங்கள் மற்றும் சுத்திகரிக்கப்பட்ட கார்புகளை குறைக்கவும்."
+
+msgid "Discuss low glucose symptoms with a clinician if you feel dizziness or fatigue."
+msgstr "தலைச்சுற்றல் அல்லது சோர்வு இருந்தால் குறைந்த குளுக்கோஸ் அறிகுறிகளை மருத்துவருடன் பேசுங்கள்."
+
+msgid "A structured weight-loss plan can improve insulin sensitivity."
+msgstr "ஒழுங்குபடுத்தப்பட்ட எடை குறைப்பு திட்டம் இன்சுலின் செறிவை மேம்படுத்தலாம்."
+
+msgid "Aim for gradual weight reduction with balanced meals."
+msgstr "சமநிலை உணவுகளுடன் மெல்ல மெல்ல எடை குறைப்பதை நோக்கமாக கொள்ளுங்கள்."
+
+msgid "Reduce sodium intake and monitor blood pressure regularly."
+msgstr "சோடியம் உட்கொள்ளுதலை குறைத்து இரத்த அழுத்தத்தை தொடர்ந்து கண்காணிக்கவும்."
+
+msgid "Annual screening is advised for adults over 45."
+msgstr "45 வயதுக்கு மேற்பட்டவர்களுக்கு வருடாந்திர பரிசோதனை பரிந்துரைக்கப்படுகிறது."
+
+msgid "Dashboard Summary"
+msgstr "டாஷ்போர்டு சுருக்கம்"
+
+msgid "No data"
+msgstr "தரவு இல்லை"
+
+msgid "Recent Predictions"
+msgstr "சமீபத்திய கணிப்புகள்"
+
+msgid "Health Check"
+msgstr "ஆரோக்கிய சோதனை"
+
+msgid "System Health"
+msgstr "சிஸ்டம் ஆரோக்கியம்"
+
+msgid "Translations"
+msgstr "மொழிபெயர்ப்புகள்"
+
+msgid "OK"
+msgstr "சரி"
+
+msgid "Needs attention"
+msgstr "கவனம் தேவை"
+
+msgid "PDF Report"
+msgstr "PDF அறிக்கை"
+
+msgid "Ready"
+msgstr "தயார்"
+
+msgid "Unavailable"
+msgstr "கிடைக்கவில்லை"
+
+msgid "Email"
+msgstr "மின்னஞ்சல்"
+
+msgid "Backend"
+msgstr "பேக்கெண்ட்"
+
+msgid "SMTP configured"
+msgstr "SMTP அமைக்கப்பட்டுள்ளது"
+
+msgid "SMTP not configured"
+msgstr "SMTP அமைக்கப்படவில்லை"
+
+msgid "Console backend"
+msgstr "கன்சோல் பேக்கெண்ட்"
+
+# --- Survey page ---
+msgid "Survey"
+msgstr "கணக்கெடுப்பு"
+
+msgid "Contribute to Survey"
+msgstr "கணக்கெடுப்பில் பங்களிக்கவும்"
+
+msgid "Contribute to Diabetes Survey"
+msgstr "நீரிழிவு கணக்கெடுப்பில் பங்களிக்கவும்"
+
+msgid "Help us improve our prediction model by contributing your health data anonymously."
+msgstr "உங்களது சுகாதாரத் தரவை அநாமதேயமாகப் பங்களிப்பதன் மூலம் எங்கள் கணிப்பு மாதிரியை மேம்படுத்த உதவுங்கள்."
+
+msgid "Your contribution helps research. The date is recorded automatically by the system."
+msgstr "உங்கள் பங்களிப்பு ஆராய்ச்சிக்கு உதவுகிறது. தேதி கணினியால் தானாக பதிவு செய்யப்படும்."
+
+msgid "Date of Recording"
+msgstr "பதிவு தேதி"
+
+msgid "Submit Survey"
+msgstr "கணக்கெடுப்பை சமர்ப்பிக்கவும்"
+
+msgid "Cancel"
+msgstr "ரத்து செய்"
+
+msgid "Survey Statistics"
+msgstr "கணக்கெடுப்பு புள்ளிவிவரங்கள்"
+
+msgid "Total Responses"
+msgstr "மொத்த பதில்கள்"
+
+msgid "Diabetes Cases"
+msgstr "நீரிழிவு நிகழ்வுகள்"
+
+msgid "No Diabetes Cases"
+msgstr "நீரிழிவு இல்லாத நிகழ்வுகள்"
+
+# --- Admin Dashboard ---
+msgid "Admin"
+msgstr "நிர்வாகம்"
+
+msgid "Admin Dashboard"
+msgstr "நிர்வாக டாஷ்போர்டு"
+
+msgid "View all user predictions and survey responses"
+msgstr "அனைத்து பயனர் கணிப்புகள் மற்றும் கணக்கெடுப்பு பதில்களைக் காண்க"
+
+msgid "All"
+msgstr "அனைத்தும்"
+
+msgid "Predictions"
+msgstr "கணிப்புகள்"
+
+msgid "Logged-in"
+msgstr "உள்நுழைந்த"
+
+msgid "Anonymous"
+msgstr "அநாமதேய"
+
+msgid "Surveys"
+msgstr "கணக்கெடுப்புகள்"
+
+msgid "Survey Responses"
+msgstr "கணக்கெடுப்பு பதில்கள்"
+
+msgid "High Risk Predictions"
+msgstr "அதிக ஆபத்து கணிப்புகள்"
+
+msgid "Diabetes in Survey"
+msgstr "கணக்கெடுப்பில் நீரிழிவு"
+
+msgid "User Responses"
+msgstr "பயனர் பதில்கள்"
+
+msgid "Search by name..."
+msgstr "பெயர் மூலம் தேடு..."
+
+msgid "Type"
+msgstr "வகை"
+
+msgid "User / Name"
+msgstr "பயனர் / பெயர்"
+
+msgid "BP"
+msgstr "இரத்த அழுத்தம்"
+
+msgid "Result / Outcome"
+msgstr "முடிவு / விளைவு"
+
+msgid "Details"
+msgstr "விவரங்கள்"
+
+msgid "Diabetes"
+msgstr "நீரிழிவு"
+
+msgid "No Diabetes"
+msgstr "நீரிழிவு இல்லை"
+
+msgid "No responses found."
+msgstr "பதில்கள் எதுவும் கிடைக்கவில்லை."
+
+msgid "Showing"
+msgstr "காட்டுகிறது"
+
+msgid "of"
+msgstr "இல்"
+
+msgid "responses"
+msgstr "பதில்கள்"
+
+# --- Admin Home ---
+msgid "Diabetes Prediction System"
+msgstr "நீரிழிவு கணிப்பு அமைப்பு"
+
+msgid "Administrative overview of the Diabetes Risk Assessment platform."
+msgstr "நீரிழிவு ஆபத்து மதிப்பீட்டு தளத்தின் நிர்வாக மேலோட்டம்."
+
+msgid "About the System"
+msgstr "அமைப்பு பற்றி"
+
+msgid "Stacking ensemble ML model (XGBoost + LightGBM + Random Forest)"
+msgstr "ஸ்டாக்கிங் என்சம்பிள் ML மாதிரி (XGBoost + LightGBM + Random Forest)"
+
+msgid "Survey Data Collection"
+msgstr "கணக்கெடுப்பு தரவு சேகரிப்பு"
+
+msgid "Quick Links"
+msgstr "விரைவு இணைப்புகள்"
+
+msgid "Registered Users"
+msgstr "பதிவுசெய்த பயனர்கள்"
+
+# --- Registered Users Page ---
+msgid "Users"
+msgstr "பயனர்கள்"
+
+msgid "Total"
+msgstr "மொத்தம்"
+
+msgid "users"
+msgstr "பயனர்கள்"
+
+msgid "Back to Dashboard"
+msgstr "டாஷ்போர்டுக்கு திரும்பு"
+
+msgid "Search users..."
+msgstr "பயனர்களைத் தேடு..."
+
+msgid "User"
+msgstr "பயனர்"
+
+msgid "Role"
+msgstr "பங்கு"
+
+msgid "Joined"
+msgstr "சேர்ந்தது"
+
+msgid "Last Login"
+msgstr "கடைசி உள்நுழைவு"
+
+msgid "Staff"
+msgstr "ஊழியர்"
+
+msgid "No users found."
+msgstr "பயனர்கள் எதுவும் கிடைக்கவில்லை."
+
+msgid "View Registered Users"
+msgstr "பதிவுசெய்த பயனர்களைக் காண்க"
+
+# --- User History Page ---
+msgid "User History"
+msgstr "பயனர் வரலாறு"
+
+msgid "All Users"
+msgstr "அனைத்து பயனர்கள்"
+
+msgid "Survey History"
+msgstr "கணக்கெடுப்பு வரலாறு"
+
+msgid "Height"
+msgstr "உயரம்"
+
+msgid "Weight"
+msgstr "எடை"
+
+msgid "Outcome"
+msgstr "விளைவு"
+
+msgid "No activity found for this user."
+msgstr "இந்தப் பயனருக்கு எந்த செயல்பாடும் இல்லை."
+
+# --- Dashboard Stats ---
+msgid "Diabetic"
+msgstr "நீரிழிவு நோயாளி"
+
+msgid "Non-Diabetic"
+msgstr "நீரிழிவு இல்லாதவர்"
+
+msgid "PDF Reports with Diet Plan"
+msgstr "உணவு திட்டத்துடன் PDF அறிக்கைகள்"
+
+# --- Delete User / Admin ---
+msgid "Delete User"
+msgstr "பயனரை நீக்கு"
+
+msgid "Are you sure you want to delete"
+msgstr "நீங்கள் நிச்சயமாக நீக்க விரும்புகிறீர்களா"
+
+msgid "All predictions and surveys by this user will also be removed."
+msgstr "இந்த பயனரின் அனைத்து கணிப்புகளும் கருத்துக்கணிப்புகளும் நீக்கப்படும்."
+
+msgid "Cancel"
+msgstr "ரத்து செய்"
+
+msgid "Delete"
+msgstr "நீக்கு"
+
+msgid "You cannot delete your own account."
+msgstr "உங்கள் சொந்த கணக்கை நீக்க முடியாது."
+
+msgid "Only superusers can delete other superusers."
+msgstr "சூப்பர் பயனர்கள் மட்டுமே மற்ற சூப்பர் பயனர்களை நீக்க முடியும்."
+
+msgid "User \"%(username)s\" has been deleted."
+msgstr "பயனர் \"%(username)s\" நீக்கப்பட்டார்."
+
+msgid "Registered Users"
+msgstr "பதிவு செய்த பயனர்கள்"
+
+# --- PDF Clinical Values ---
+msgid "Normal / Low Risk"
+msgstr "சாதாரண / குறைந்த ஆபத்து"
+
+msgid "Borderline / Moderate"
+msgstr "எல்லை / மிதமான"
+
+msgid "High / Concerning"
+msgstr "உயர் / கவலைக்குரிய"
+
+msgid "Normal"
+msgstr "சாதாரணம்"
+
+msgid "Moderate"
+msgstr "மிதமான"
+
+msgid "Status"
+msgstr "நிலை"
+
+msgid "Min"
+msgstr "குறைந்தபட்சம்"
+
+msgid "Max"
+msgstr "அதிகபட்சம்"

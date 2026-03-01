@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Prediction Result" %}{% endblock %}
+{% block extra_css %}
+<style>
+    .risk-theme-low {
+        background: #f2fbf6;
+        border: 1px solid #c9ecd9;
+    }
+    .risk-theme-low .advice-title {
+        color: #1f9d68;
+    }
+    .risk-theme-medium {
+        background: #fffaf0;
+        border: 1px solid #f8e3b1;
+    }
+    .risk-theme-medium .advice-title {
+        color: #b7791f;
+    }
+    .risk-theme-high {
+        background: #fff5f6;
+        border: 1px solid #f5c2c7;
+    }
+    .risk-theme-high .advice-title {
+        color: #c53030;
+    }
+    .advice-list li {
+        background: rgba(255,255,255,0.65);
+        border-radius: 10px;
+        margin-bottom: 0.4rem;
+        border: 0;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card soft-card p-4 mb-4">
+            <h3 class="mb-4"><i class="bi bi-graph-up"></i> {% trans "Prediction Result" %}</h3>
+            <div class="alert alert-{% if result.prediction == 'Diabetic' %}danger{% else %}success{% endif %}">
+                <h4 class="alert-heading">
+                    {{ result.prediction }} — Risk: <span class="risk-{{ result.risk_level|lower }}">{{ result.risk_level }}</span>
+                </h4>
+                <p class="mb-0">Probability: <strong>{{ result.probability_pct }}</strong></p>
+            </div>
+            <div class="mt-4 p-3 rounded {{ risk_theme|default:'risk-theme-medium' }}">
+            <h5 class="advice-title mb-3">{% trans "Personalized Health Advice" %}</h5>
+            <ul class="list-group list-group-flush advice-list">
+                {% for tip in advice %}
+                <li class="list-group-item"><i class="bi bi-check2 text-success me-2"></i>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+            </div>
+            {% if user.is_authenticated and prediction %}
+            <div class="mt-4">
+                <a href="/report/{{ prediction.pk }}/pdf/" class="btn btn-outline-primary">
+                    <i class="bi bi-file-pdf"></i> {% trans "Download PDF Report" %}
+                </a>
+                <a href="/report/{{ prediction.pk }}/email/" class="btn btn-outline-secondary">
+                    <i class="bi bi-envelope"></i> {% trans "Email Report" %}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="d-flex gap-2">
+            <a href="/predict/" class="btn btn-primary">{% trans "New Prediction" %}</a>
+            {% if user.is_authenticated %}
+            <a href="/dashboard/" class="btn btn-outline-secondary">{% trans "View Dashboard" %}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

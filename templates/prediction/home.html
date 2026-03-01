@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Home" %}{% endblock %}
+{% block content %}
+{% if user.is_staff %}
+{# ── Admin Home: System information only ── #}
+<div class="row g-4">
+    <div class="col-lg-8 mx-auto">
+        <div class="hero-card text-center mb-4">
+            <h1 class="display-5 fw-bold text-primary mb-3">
+                <i class="bi bi-heart-pulse"></i> {% trans "Diabetes Prediction System" %}
+            </h1>
+            <p class="lead text-muted">{% trans "Administrative overview of the Diabetes Risk Assessment platform." %}</p>
+        </div>
+    </div>
+</div>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card soft-card p-4 h-100">
+            <h5 class="text-primary mb-3"><i class="bi bi-info-circle me-2"></i>{% trans "About the System" %}</h5>
+            <ul class="feature-list">
+                <li><i class="bi bi-cpu text-primary"></i> {% trans "Stacking ensemble ML model (XGBoost + LightGBM + Random Forest)" %}</li>
+                <li><i class="bi bi-graph-up text-success"></i> {% trans "91%+ Accurate ML Model" %}</li>
+                <li><i class="bi bi-translate text-info"></i> {% trans "Multi-language (EN/Tamil/Hindi)" %}</li>
+                <li><i class="bi bi-file-earmark-pdf text-danger"></i> {% trans "PDF Reports with Diet Plan" %}</li>
+                <li><i class="bi bi-mic text-warning"></i> {% trans "Voice Input" %}</li>
+                <li><i class="bi bi-clipboard2-pulse text-success"></i> {% trans "Survey Data Collection" %}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card soft-card p-4 h-100">
+            <h5 class="text-primary mb-3"><i class="bi bi-speedometer2 me-2"></i>{% trans "Quick Links" %}</h5>
+            <div class="d-grid gap-3">
+                <a href="/admin-dashboard/" class="btn btn-primary btn-lg">
+                    <i class="bi bi-shield-lock me-2"></i>{% trans "Admin Dashboard" %}
+                </a>
+                <a href="/admin-dashboard/users/" class="btn btn-outline-info btn-lg">
+                    <i class="bi bi-people me-2"></i>{% trans "Registered Users" %}
+                </a>
+                <a href="/health/" class="btn btn-outline-success btn-lg">
+                    <i class="bi bi-heart-pulse me-2"></i>{% trans "System Health" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+{# ── Regular User Home ── #}
+<div class="row align-items-center min-vh-50 g-4">
+    <div class="col-lg-6">
+        <div class="hero-card">
+            <h1 class="display-5 fw-bold text-primary mb-3">
+                <i class="bi bi-heart-pulse"></i> {% trans "Diabetes Risk Assessment" %}
+            </h1>
+            <p class="lead text-muted mb-4">
+                {% trans "Get an AI-powered prediction of your diabetes risk based on clinical parameters. Our stacking ensemble model achieves 91%+ accuracy." %}
+            </p>
+            <div class="d-flex gap-2 flex-wrap mb-3">
+                <a href="/predict/" class="btn btn-primary btn-lg">
+                    <i class="bi bi-calculator"></i> {% trans "Start Prediction" %}
+                </a>
+                <a href="/survey/" class="btn btn-outline-success btn-lg">
+                    <i class="bi bi-clipboard2-pulse"></i> {% trans "Contribute to Survey" %}
+                </a>
+                {% if not user.is_authenticated %}
+                <a href="/register/" class="btn btn-outline-primary btn-lg">{% trans "Register" %}</a>
+                {% endif %}
+            </div>
+            <div class="hero-stats">
+                <span class="stat-pill"><i class="bi bi-graph-up"></i> {% trans "91%+ Accurate ML Model" %}</span>
+                <span class="stat-pill"><i class="bi bi-translate"></i> {% trans "Multi-language (EN/Tamil/Hindi)" %}</span>
+                <span class="stat-pill"><i class="bi bi-shield-check"></i> {% trans "Personalized Health Advice" %}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card feature-card p-4">
+            <h5 class="text-primary mb-3">{% trans "Features" %}</h5>
+            <ul class="feature-list">
+                <li><i class="bi bi-check-circle-fill"></i> {% trans "Save & Track History" %}</li>
+                <li><i class="bi bi-check-circle-fill"></i> {% trans "PDF Reports with Diet Plan" %}</li>
+                <li><i class="bi bi-check-circle-fill"></i> {% trans "Voice Input" %}</li>
+                <li><i class="bi bi-check-circle-fill"></i> {% trans "Personalized Health Advice" %}</li>
+                <li><i class="bi bi-check-circle-fill"></i> {% trans "Contribute to Diabetes Survey" %}</li>
+            </ul>
+            <div class="mini-cta">
+                <i class="bi bi-lightning-charge"></i>
+                <span>{% trans "Get results in seconds with secure storage." %}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

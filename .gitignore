@@ -1,0 +1,87 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+/staticfiles/
+/media/
+
+# Environment variables (contains secrets)
+.env
+.env.local
+.env.*.local
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Model outputs (plots can be regenerated)
+outputs/plots/
+
+# Compiled translations (will be regenerated)
+*.mo
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Testing
+.pytest_cache/
+.tox/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Documentation
+docs/_build/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# PyCharm
+.idea/
+
+# If you want to exclude large model files to reduce repo size,
+# uncomment the line below. Render will train fallback models automatically.
+# outputs/models/
+
+# Keep these files for Render deployment:
+# - requirements.txt
+# - render.yaml
+# - build.sh
+# - Procfile
+# - manage.py
+# - all .py source files
+# - templates/
+# - locale/ (translation source .po files)
+# - data/ (dataset)

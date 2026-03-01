@@ -1,0 +1,658 @@
+# Hindi translations for Diabetes Prediction
+# Copyright (C) 2025
+# This file is distributed under the same license as the Diabetes Prediction project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Diabetes Prediction"
+msgstr "मधुमेह भविष्यवाणी"
+
+msgid "Diabetes Risk Assessment"
+msgstr "मधुमेह जोखिम मूल्यांकन"
+
+msgid "Diabetes Predict"
+msgstr "मधुमेह भविष्यवाणी"
+
+msgid "Home"
+msgstr "मुख्य पृष्ठ"
+
+msgid "Predict"
+msgstr "भविष्यवाणी"
+
+msgid "History"
+msgstr "इतिहास"
+
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+msgid "Hello"
+msgstr "नमस्ते"
+
+msgid "Logout"
+msgstr "लॉग आउट"
+
+msgid "Login"
+msgstr "लॉग इन"
+
+msgid "Register"
+msgstr "रजिस्टर"
+
+msgid "Diabetes Prediction. For educational purposes. Consult a doctor for medical advice."
+msgstr "मधुमेह भविष्यवाणी। शैक्षिक उद्देश्यों के लिए। चिकित्सा सलाह के लिए डॉक्टर से सलाह लें।"
+
+msgid "Prediction Result"
+msgstr "भविष्यवाणी परिणाम"
+
+msgid "Personalized Health Advice"
+msgstr "व्यक्तिगत स्वास्थ्य सलाह"
+
+msgid "Download PDF Report"
+msgstr "पीडीएफ रिपोर्ट डाउनलोड करें"
+
+msgid "Email Report"
+msgstr "ईमेल रिपोर्ट"
+
+msgid "New Prediction"
+msgstr "नई भविष्यवाणी"
+
+msgid "View Dashboard"
+msgstr "डैशबोर्ड देखें"
+
+msgid "Create Account"
+msgstr "खाता बनाएं"
+
+msgid "Password"
+msgstr "पासवर्ड"
+
+msgid "Confirm Password"
+msgstr "पासवर्ड की पुष्टि करें"
+
+msgid "Email"
+msgstr "ईमेल"
+
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+msgid "Start Prediction"
+msgstr "भविष्यवाणी शुरू करें"
+
+msgid "Features"
+msgstr "विशेषताएं"
+
+msgid "Forgot password?"
+msgstr "पासवर्ड भूल गए?"
+
+msgid "Don't have an account?"
+msgstr "खाता नहीं है?"
+
+msgid "Already have an account?"
+msgstr "पहले से खाता है?"
+
+msgid "Get an AI-powered prediction of your diabetes risk based on clinical parameters. Our stacking ensemble model achieves 91%+ accuracy."
+msgstr "क्लिनिकल मापदंडों के आधार पर अपने मधुमेह जोखिम की AI-संचालित भविष्यवाणी प्राप्त करें। हमारा मॉडल 91%+ सटीकता प्राप्त करता है।"
+
+msgid "91%+ Accurate ML Model"
+msgstr "91%+ सटीक एमएल मॉडल"
+
+msgid "Save & Track History"
+msgstr "इतिहास सहेजें और ट्रैक करें"
+
+msgid "PDF Reports"
+msgstr "पीडीएफ रिपोर्ट"
+
+msgid "Voice Input"
+msgstr "आवाज़ इनपुट"
+
+msgid "Multi-language (EN/Tamil/Hindi)"
+msgstr "बहुभाषी (अंग्रेज़ी/तमिल/हिंदी)"
+
+msgid "Diabetes Risk Prediction"
+msgstr "मधुमेह जोखिम भविष्यवाणी"
+
+msgid "Use the microphone button next to any field for voice input (speak the number)."
+msgstr "आवाज़ इनपुट के लिए किसी भी फ़ील्ड के पास माइक्रोफ़ोन बटन का उपयोग करें (संख्या बोलें)।"
+
+msgid "Voice input"
+msgstr "आवाज़ इनपुट"
+
+msgid "Get Prediction"
+msgstr "भविष्यवाणी प्राप्त करें"
+
+msgid "Speech recognition is not supported in your browser. Try Chrome."
+msgstr "आपके ब्राउज़र में स्पीच रिकग्निशन समर्थित नहीं है। कृपया Chrome आज़माएँ।"
+
+msgid "Your Prediction Dashboard"
+msgstr "आपका भविष्यवाणी डैशबोर्ड"
+
+msgid "Total Predictions"
+msgstr "कुल भविष्यवाणियाँ"
+
+msgid "Risk Distribution"
+msgstr "जोखिम वितरण"
+
+msgid "No data yet"
+msgstr "अभी तक कोई डेटा नहीं"
+
+msgid "Quick Actions"
+msgstr "त्वरित क्रियाएँ"
+
+msgid "View History"
+msgstr "इतिहास देखें"
+
+msgid "Recent Predictions Trend"
+msgstr "हाल की भविष्यवाणियों की प्रवृत्ति"
+
+msgid "Risk Level Distribution"
+msgstr "जोखिम स्तर वितरण"
+
+msgid "Probability %"
+msgstr "संभावना %"
+
+msgid "Prediction History"
+msgstr "भविष्यवाणी इतिहास"
+
+msgid "Date"
+msgstr "तारीख"
+
+msgid "Result"
+msgstr "परिणाम"
+
+msgid "Risk"
+msgstr "जोखिम"
+
+msgid "Probability"
+msgstr "संभावना"
+
+msgid "Actions"
+msgstr "क्रियाएँ"
+
+msgid "Download PDF"
+msgstr "पीडीएफ डाउनलोड करें"
+
+msgid "Email report"
+msgstr "ईमेल रिपोर्ट"
+
+msgid "No predictions yet."
+msgstr "अभी तक कोई भविष्यवाणी नहीं।"
+
+msgid "Make your first prediction"
+msgstr "अपनी पहली भविष्यवाणी करें"
+
+msgid "Pregnancies"
+msgstr "गर्भधारण"
+
+msgid "Glucose"
+msgstr "ग्लूकोज़"
+
+msgid "Blood Pressure"
+msgstr "रक्तचाप"
+
+msgid "Skin Thickness"
+msgstr "त्वचा की मोटाई"
+
+msgid "Insulin"
+msgstr "इंसुलिन"
+
+msgid "BMI"
+msgstr "बीएमआई"
+
+msgid "Diabetes Pedigree Function"
+msgstr "डायबिटीज पेडिग्री फ़ंक्शन"
+
+msgid "Age"
+msgstr "आयु"
+
+msgid "0-20 (Male: enter 0)"
+msgstr "0-20 (पुरुष: 0 दर्ज करें)"
+
+msgid "Male: enter 0"
+msgstr "पुरुष: 0 दर्ज करें"
+
+msgid "0-199 mg/dL"
+msgstr "0-199 mg/dL"
+
+msgid "0-122 mmHg"
+msgstr "0-122 mmHg"
+
+msgid "0-99 mm"
+msgstr "0-99 mm"
+
+msgid "0-846 mu U/ml"
+msgstr "0-846 mu U/ml"
+
+msgid "0-67 kg/m²"
+msgstr "0-67 kg/m²"
+
+msgid "0.078-2.42"
+msgstr "0.078-2.42"
+
+msgid "21-81 years"
+msgstr "21-81 वर्ष"
+
+msgid "Email is not configured. Set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in .env."
+msgstr "ईमेल कॉन्फ़िगर नहीं है। .env में EMAIL_HOST_USER और EMAIL_HOST_PASSWORD सेट करें।"
+
+msgid "SMTP email failed. Report was printed to server logs using console backend."
+msgstr "SMTP ईमेल विफल रहा। रिपोर्ट को कंसोल बैकएंड के साथ सर्वर लॉग में प्रिंट किया गया।"
+
+msgid "Email backend is console. No email was sent. Configure SMTP in .env."
+msgstr "ईमेल बैकएंड कंसोल है। कोई ईमेल नहीं भेजा गया। .env में SMTP कॉन्फ़िगर करें।"
+
+msgid "Report not found for this prediction."
+msgstr "इस भविष्यवाणी के लिए रिपोर्ट नहीं मिली।"
+
+msgid "Invalid username or password."
+msgstr "गलत उपयोगकर्ता नाम या पासवर्ड।"
+
+msgid "Patient Information"
+msgstr "रोगी जानकारी"
+
+msgid "Name"
+msgstr "नाम"
+
+msgid "Email ID"
+msgstr "ईमेल आईडी"
+
+msgid "Not provided"
+msgstr "उपलब्ध नहीं"
+
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+msgid "Visit Date"
+msgstr "भेंट तिथि"
+
+msgid "Threshold Values"
+msgstr "सीमा मान"
+
+msgid "Metric"
+msgstr "मापदंड"
+
+msgid "Min"
+msgstr "न्यूनतम"
+
+msgid "Max"
+msgstr "अधिकतम"
+
+msgid "Units"
+msgstr "इकाई"
+
+msgid "Value"
+msgstr "मान"
+
+msgid "Recommendation"
+msgstr "सिफारिश"
+
+msgid "count"
+msgstr "गणना"
+
+msgid "ratio"
+msgstr "अनुपात"
+
+msgid "years"
+msgstr "वर्ष"
+
+msgid "Prediction"
+msgstr "भविष्यवाणी"
+
+msgid "Risk Level"
+msgstr "जोखिम स्तर"
+
+msgid "Report generated on: %(date)s"
+msgstr "रिपोर्ट बनाई गई: %(date)s"
+
+msgid "Risk Badge"
+msgstr "जोखिम बैज"
+
+msgid "Get results in seconds with secure storage."
+msgstr "सुरक्षित संग्रहण के साथ सेकंडों में परिणाम पाएं।"
+
+msgid "Track trends, risks, and your latest insights."
+msgstr "रुझान, जोखिम और नवीनतम जानकारी ट्रैक करें।"
+
+msgid "Updated"
+msgstr "अपडेटेड"
+
+msgid "Speak a number and we will fill it automatically."
+msgstr "संख्या बोलें और हम इसे अपने आप भर देंगे।"
+
+msgid "Speech input will appear here."
+msgstr "स्पीच इनपुट यहां दिखाई देगा।"
+
+msgid "Listening..."
+msgstr "सुन रहे हैं..."
+
+msgid "No speech detected."
+msgstr "कोई आवाज़ नहीं मिली।"
+
+msgid "Reduce sugary drinks and refined carbs to help control glucose."
+msgstr "ग्लूकोज़ नियंत्रित करने के लिए मीठे पेय और परिष्कृत कार्ब्स कम करें।"
+
+msgid "Discuss low glucose symptoms with a clinician if you feel dizziness or fatigue."
+msgstr "यदि चक्कर या थकान महसूस हो तो कम ग्लूकोज़ के लक्षणों पर डॉक्टर से बात करें।"
+
+msgid "A structured weight-loss plan can improve insulin sensitivity."
+msgstr "संरचित वजन घटाने की योजना इंसुलिन संवेदनशीलता सुधार सकती है।"
+
+msgid "Aim for gradual weight reduction with balanced meals."
+msgstr "संतुलित भोजन के साथ धीरे-धीरे वजन कम करने का लक्ष्य रखें।"
+
+msgid "Reduce sodium intake and monitor blood pressure regularly."
+msgstr "सोडियम कम करें और नियमित रूप से रक्तचाप जांचें।"
+
+msgid "Annual screening is advised for adults over 45."
+msgstr "45 से अधिक आयु वालों के लिए वार्षिक स्क्रीनिंग की सलाह दी जाती है।"
+
+msgid "Dashboard Summary"
+msgstr "डैशबोर्ड सारांश"
+
+msgid "No data"
+msgstr "कोई डेटा नहीं"
+
+msgid "Recent Predictions"
+msgstr "हाल की भविष्यवाणियाँ"
+
+msgid "Health Check"
+msgstr "हेल्थ चेक"
+
+msgid "System Health"
+msgstr "सिस्टम स्वास्थ्य"
+
+msgid "Translations"
+msgstr "अनुवाद"
+
+msgid "OK"
+msgstr "ठीक है"
+
+msgid "Needs attention"
+msgstr "ध्यान आवश्यक"
+
+msgid "PDF Report"
+msgstr "पीडीएफ रिपोर्ट"
+
+msgid "Ready"
+msgstr "तैयार"
+
+msgid "Unavailable"
+msgstr "उपलब्ध नहीं"
+
+msgid "Email"
+msgstr "ईमेल"
+
+msgid "Backend"
+msgstr "बैकएंड"
+
+msgid "SMTP configured"
+msgstr "SMTP कॉन्फ़िगर है"
+
+msgid "SMTP not configured"
+msgstr "SMTP कॉन्फ़िगर नहीं है"
+
+msgid "Console backend"
+msgstr "कंसोल बैकएंड"
+
+# --- Survey page ---
+msgid "Survey"
+msgstr "सर्वेक्षण"
+
+msgid "Contribute to Survey"
+msgstr "सर्वेक्षण में योगदान दें"
+
+msgid "Contribute to Diabetes Survey"
+msgstr "मधुमेह सर्वेक्षण में योगदान दें"
+
+msgid "Help us improve our prediction model by contributing your health data anonymously."
+msgstr "अपने स्वास्थ्य डेटा का गुमनाम रूप से योगदान करके हमारे भविष्यवाणी मॉडल को बेहतर बनाने में मदद करें।"
+
+msgid "Your contribution helps research. The date is recorded automatically by the system."
+msgstr "आपका योगदान शोध में मदद करता है। तारीख सिस्टम द्वारा स्वचालित रूप से दर्ज की जाती है।"
+
+msgid "Date of Recording"
+msgstr "रिकॉर्डिंग की तारीख"
+
+msgid "Submit Survey"
+msgstr "सर्वेक्षण जमा करें"
+
+msgid "Cancel"
+msgstr "रद्द करें"
+
+msgid "Survey Statistics"
+msgstr "सर्वेक्षण आँकड़े"
+
+msgid "Total Responses"
+msgstr "कुल प्रतिक्रियाएँ"
+
+msgid "Diabetes Cases"
+msgstr "मधुमेह के मामले"
+
+msgid "No Diabetes Cases"
+msgstr "बिना मधुमेह के मामले"
+
+# --- Admin Dashboard ---
+msgid "Admin"
+msgstr "व्यवस्थापक"
+
+msgid "Admin Dashboard"
+msgstr "व्यवस्थापक डैशबोर्ड"
+
+msgid "View all user predictions and survey responses"
+msgstr "सभी उपयोगकर्ता भविष्यवाणियाँ और सर्वेक्षण प्रतिक्रियाएँ देखें"
+
+msgid "All"
+msgstr "सभी"
+
+msgid "Predictions"
+msgstr "भविष्यवाणियाँ"
+
+msgid "Logged-in"
+msgstr "लॉग-इन"
+
+msgid "Anonymous"
+msgstr "गुमनाम"
+
+msgid "Surveys"
+msgstr "सर्वेक्षण"
+
+msgid "Survey Responses"
+msgstr "सर्वेक्षण प्रतिक्रियाएँ"
+
+msgid "High Risk Predictions"
+msgstr "उच्च जोखिम भविष्यवाणियाँ"
+
+msgid "Diabetes in Survey"
+msgstr "सर्वेक्षण में मधुमेह"
+
+msgid "User Responses"
+msgstr "उपयोगकर्ता प्रतिक्रियाएँ"
+
+msgid "Search by name..."
+msgstr "नाम से खोजें..."
+
+msgid "Type"
+msgstr "प्रकार"
+
+msgid "User / Name"
+msgstr "उपयोगकर्ता / नाम"
+
+msgid "BP"
+msgstr "रक्तचाप"
+
+msgid "Result / Outcome"
+msgstr "परिणाम / नतीजा"
+
+msgid "Details"
+msgstr "विवरण"
+
+msgid "Diabetes"
+msgstr "मधुमेह"
+
+msgid "No Diabetes"
+msgstr "मधुमेह नहीं"
+
+msgid "No responses found."
+msgstr "कोई प्रतिक्रिया नहीं मिली।"
+
+msgid "Showing"
+msgstr "दिखा रहा है"
+
+msgid "of"
+msgstr "में से"
+
+msgid "responses"
+msgstr "प्रतिक्रियाएँ"
+
+# --- Admin Home ---
+msgid "Diabetes Prediction System"
+msgstr "मधुमेह भविष्यवाणी प्रणाली"
+
+msgid "Administrative overview of the Diabetes Risk Assessment platform."
+msgstr "मधुमेह जोखिम मूल्यांकन मंच का प्रशासनिक अवलोकन।"
+
+msgid "About the System"
+msgstr "सिस्टम के बारे में"
+
+msgid "Stacking ensemble ML model (XGBoost + LightGBM + Random Forest)"
+msgstr "स्टैकिंग एनसेम्बल ML मॉडल (XGBoost + LightGBM + Random Forest)"
+
+msgid "Survey Data Collection"
+msgstr "सर्वेक्षण डेटा संग्रह"
+
+msgid "Quick Links"
+msgstr "त्वरित लिंक"
+
+msgid "Registered Users"
+msgstr "पंजीकृत उपयोगकर्ता"
+
+# --- Registered Users Page ---
+msgid "Users"
+msgstr "उपयोगकर्ता"
+
+msgid "Total"
+msgstr "कुल"
+
+msgid "users"
+msgstr "उपयोगकर्ता"
+
+msgid "Back to Dashboard"
+msgstr "डैशबोर्ड पर वापस"
+
+msgid "Search users..."
+msgstr "उपयोगकर्ता खोजें..."
+
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+msgid "Role"
+msgstr "भूमिका"
+
+msgid "Joined"
+msgstr "शामिल हुए"
+
+msgid "Last Login"
+msgstr "अंतिम लॉगिन"
+
+msgid "Staff"
+msgstr "स्टाफ"
+
+msgid "No users found."
+msgstr "कोई उपयोगकर्ता नहीं मिला।"
+
+msgid "View Registered Users"
+msgstr "पंजीकृत उपयोगकर्ता देखें"
+
+# --- User History Page ---
+msgid "User History"
+msgstr "उपयोगकर्ता इतिहास"
+
+msgid "All Users"
+msgstr "सभी उपयोगकर्ता"
+
+msgid "Survey History"
+msgstr "सर्वेक्षण इतिहास"
+
+msgid "Height"
+msgstr "ऊंचाई"
+
+msgid "Weight"
+msgstr "वज़न"
+
+msgid "Outcome"
+msgstr "परिणाम"
+
+msgid "No activity found for this user."
+msgstr "इस उपयोगकर्ता के लिए कोई गतिविधि नहीं मिली।"
+
+# --- Dashboard Stats ---
+msgid "Diabetic"
+msgstr "मधुमेही"
+
+msgid "Non-Diabetic"
+msgstr "गैर-मधुमेही"
+
+msgid "PDF Reports with Diet Plan"
+msgstr "आहार योजना के साथ पीडीएफ रिपोर्ट"
+
+# --- Delete User / Admin ---
+msgid "Delete User"
+msgstr "उपयोगकर्ता हटाएं"
+
+msgid "Are you sure you want to delete"
+msgstr "क्या आप वाकई हटाना चाहते हैं"
+
+msgid "All predictions and surveys by this user will also be removed."
+msgstr "इस उपयोगकर्ता की सभी भविष्यवाणियाँ और सर्वेक्षण भी हटा दिए जाएंगे।"
+
+msgid "Cancel"
+msgstr "रद्द करें"
+
+msgid "Delete"
+msgstr "हटाएं"
+
+msgid "You cannot delete your own account."
+msgstr "आप अपना स्वयं का खाता नहीं हटा सकते।"
+
+msgid "Only superusers can delete other superusers."
+msgstr "केवल सुपर उपयोगकर्ता अन्य सुपर उपयोगकर्ताओं को हटा सकते हैं।"
+
+msgid "User \"%(username)s\" has been deleted."
+msgstr "उपयोगकर्ता \"%(username)s\" को हटा दिया गया है।"
+
+msgid "Registered Users"
+msgstr "पंजीकृत उपयोगकर्ता"
+
+# --- PDF Clinical Values ---
+msgid "Normal / Low Risk"
+msgstr "सामान्य / कम जोखिम"
+
+msgid "Borderline / Moderate"
+msgstr "सीमा रेखा / मध्यम"
+
+msgid "High / Concerning"
+msgstr "उच्च / चिंताजनक"
+
+msgid "Normal"
+msgstr "सामान्य"
+
+msgid "Moderate"
+msgstr "मध्यम"
+
+msgid "Status"
+msgstr "स्थिति"
+
+msgid "Min"
+msgstr "न्यूनतम"
+
+msgid "Max"
+msgstr "अधिकतम"

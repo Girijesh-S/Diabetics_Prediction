@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Registered Users" %}{% endblock %}
+{% block extra_css %}
+<style>
+    .user-table th { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .user-table td { vertical-align: middle; }
+    .user-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #1b6ef3, #4f8ff8); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3><i class="bi bi-people text-primary"></i> {% trans "Registered Users" %}</h3>
+        <p class="text-muted mb-0">{% trans "Total" %}: {{ total_users }} {% trans "users" %}</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="/admin-dashboard/" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-arrow-left"></i> {% trans "Back to Dashboard" %}
+        </a>
+        <form method="get" class="d-inline">
+            <div class="input-group input-group-sm" style="width: 260px;">
+                <input type="text" class="form-control" name="search" value="{{ search_query }}" placeholder="{% trans 'Search users...' %}">
+                <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-hover user-table mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>{% trans "User" %}</th>
+                    <th>{% trans "Email" %}</th>
+                    <th>{% trans "Role" %}</th>
+                    <th>{% trans "Joined" %}</th>
+                    <th>{% trans "Last Login" %}</th>
+                    <th>{% trans "Predictions" %}</th>
+                    <th>{% trans "Surveys" %}</th>
+                    <th>{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in user_data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="user-avatar">{{ item.user.username|make_list|first|upper }}</span>
+                            <div>
+                                <strong>{{ item.user.username }}</strong>
+                                {% if item.user.get_full_name %}<br><small class="text-muted">{{ item.user.get_full_name }}</small>{% endif %}
+                            </div>
+                        </div>
+                    </td>
+                    <td><small>{{ item.user.email|default:"-" }}</small></td>
+                    <td>
+                        {% if item.user.is_superuser %}
+                        <span class="badge bg-danger">{% trans "Admin" %}</span>
+                        {% elif item.user.is_staff %}
+                        <span class="badge bg-warning text-dark">{% trans "Staff" %}</span>
+                        {% else %}
+                        <span class="badge bg-primary">{% trans "User" %}</span>
+                        {% endif %}
+                    </td>
+                    <td><small>{{ item.user.date_joined|date:"M d, Y" }}</small></td>
+                    <td><small>{{ item.user.last_login|date:"M d, Y H:i"|default:"-" }}</small></td>
+                    <td><span class="badge bg-primary">{{ item.pred_count }}</span></td>
+                    <td><span class="badge bg-success">{{ item.survey_count }}</span></td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a href="/admin-dashboard/users/{{ item.user.username }}/" class="btn btn-sm btn-outline-primary" title="{% trans 'View History' %}">
+                                <i class="bi bi-clock-history"></i>
+                            </a>
+                            {% if not item.user.is_superuser or request.user.is_superuser %}
+                            {% if item.user != request.user %}
+                            <button type="button" class="btn btn-sm btn-outline-danger" title="{% trans 'Delete User' %}"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal-{{ item.user.pk }}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                        <!-- Delete Confirmation Modal -->
+                        {% if item.user != request.user %}
+                        <div class="modal fade" id="deleteModal-{{ item.user.pk }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+                                <div class="modal-content" style="border-radius:16px;">
+                                    <div class="modal-header border-0 pb-0">
+                                        <h6 class="modal-title text-danger"><i class="bi bi-exclamation-triangle me-2"></i>{% trans "Delete User" %}</h6>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="mb-0">{% trans "Are you sure you want to delete" %} <strong>{{ item.user.username }}</strong>?</p>
+                                        <small class="text-muted">{% trans "All predictions and surveys by this user will also be removed." %}</small>
+                                    </div>
+                                    <div class="modal-footer border-0 pt-0">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+                                        <form method="post" action="/admin-dashboard/users/{{ item.user.username }}/delete/" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash me-1"></i>{% trans "Delete" %}</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="9" class="text-center text-muted py-4">{% trans "No users found." %}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

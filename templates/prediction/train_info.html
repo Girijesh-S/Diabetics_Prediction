@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Train Model{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card p-4">
+            <h3 class="mb-4"><i class="bi bi-cpu"></i> Model Training Required</h3>
+            <p>The prediction model has not been trained yet. To generate the model files:</p>
+            <ol>
+                <li>Open the Jupyter notebook <code>Diabetics_Prediction.ipynb</code> in this folder.</li>
+                <li>Run all cells (Kernel → Restart & Run All).</li>
+                <li>This will create the <code>outputs/models/</code> folder with:
+                    <ul>
+                        <li><code>best_model.pkl</code></li>
+                        <li><code>scaler.pkl</code></li>
+                        <li><code>meta.pkl</code></li>
+                        <li><code>pop_defaults.pkl</code></li>
+                    </ul>
+                </li>
+                <li>Restart the web application.</li>
+            </ol>
+            <a href="/" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
