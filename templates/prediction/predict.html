@@ -102,8 +102,10 @@ document.querySelectorAll('.speech-btn').forEach(btn => {
         this.querySelector('i').classList.add('bi-mic-fill');
         rec.onerror = (e) => {
             console.error('Speech recognition error:', e.error);
-            if (preview) {
-                preview.textContent = '{% trans "Error: " %}' + e.error;
+            if (e.error !== 'aborted') {  // Don't show error if user aborted
+                if (preview) {
+                    preview.textContent = '{% trans "Error: " %}' + e.error;
+                }
             }
         };
         rec.onend = () => {

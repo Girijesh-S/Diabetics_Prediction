@@ -106,9 +106,9 @@ EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.
 EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='g0300747@gmail.com')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='yego tbou ykke bgqd')
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='g0300747@gmail.com')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='').strip()
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='').strip()
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='').strip()
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

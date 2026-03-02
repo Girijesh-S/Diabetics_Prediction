@@ -303,7 +303,6 @@ def get_personalized_advice(pred):
         tips.append(_('Manage stress with yoga, meditation, or hobbies — stress elevates cortisol and blood sugar.'))
 
     else:  # Low risk
-        tips.append(_('Great news! Your risk is low — maintain your healthy lifestyle with annual health screenings.'))
         tips.append(_('Continue eating a balanced diet rich in vegetables, whole grains, fruits, and lean protein.'))
         tips.append(_('Stay physically active — aim for 30 min of enjoyable exercise at least 5 days a week.'))
 
