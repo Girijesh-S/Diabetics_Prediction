@@ -1092,27 +1092,33 @@ def health_check(request):
     base_dir = Path(settings.BASE_DIR)
     locale_dir = base_dir / 'locale'
     translation_status = []
-    sample_msg = 'Home'
+    
+    # Check if .mo files exist for each language
     for code, name in [('ta', 'Tamil'), ('hi', 'Hindi')]:
         mo_path = locale_dir / code / 'LC_MESSAGES' / 'django.mo'
-        with translation.override(code):
-            translated = _(sample_msg)
+        mo_exists = mo_path.exists()
         translation_status.append({
             'code': code,
             'name': name,
-            'mo_exists': mo_path.exists(),
-            'translated': translated != sample_msg,
+            'status': 'Ready' if mo_exists else 'Needs attention',
+            'details': f"Compiled translation file found" if mo_exists else "Missing .mo file",
         })
 
+    # Check email configuration
     email_backend = settings.EMAIL_BACKEND
-    smtp_configured = True
+    email_status = 'Backend: ' + email_backend.split('.')[-1]
     if email_backend == 'django.core.mail.backends.smtp.EmailBackend':
-        smtp_configured = bool((settings.EMAIL_HOST_USER or '').strip()) and bool((settings.EMAIL_HOST_PASSWORD or '').strip())
+        has_user = bool((settings.EMAIL_HOST_USER or '').strip())
+        has_password = bool((settings.EMAIL_HOST_PASSWORD or '').strip())
+        email_configured = has_user and has_password
+        email_status = 'SMTP Configured' if email_configured else 'SMTP Not Configured'
+    else:
+        email_status = 'Console Backend (Emails printed to console)'
 
     return render(request, 'prediction/health.html', {
         'translation_status': translation_status,
         'email_backend': email_backend,
-        'smtp_configured': smtp_configured,
+        'email_status': email_status,
         'pdf_ready': True,
     })
 

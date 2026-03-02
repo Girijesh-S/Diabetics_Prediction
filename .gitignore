@@ -40,8 +40,8 @@ Thumbs.db
 # Model outputs (plots can be regenerated)
 outputs/plots/
 
-# Compiled translations (will be regenerated)
-*.mo
+# Compiled translations (MUST be committed for Render deployment)
+# *.mo  — Keep .mo files for production
 
 # Coverage reports
 htmlcov/

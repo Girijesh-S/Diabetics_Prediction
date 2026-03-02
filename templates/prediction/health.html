@@ -11,12 +11,15 @@
                 <ul class="list-group">
                     {% for item in translation_status %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>{{ item.name }} ({{ item.code }})</span>
+                        <div>
+                            <span>{{ item.name }} ({{ item.code }})</span>
+                            <div class="small text-muted">{{ item.details }}</div>
+                        </div>
                         <span>
-                            {% if item.mo_exists and item.translated %}
-                            <span class="badge bg-success">{% trans "OK" %}</span>
+                            {% if item.status == 'Ready' %}
+                            <span class="badge bg-success">{{ item.status }}</span>
                             {% else %}
-                            <span class="badge bg-warning text-dark">{% trans "Needs attention" %}</span>
+                            <span class="badge bg-warning text-dark">{{ item.status }}</span>
                             {% endif %}
                         </span>
                     </li>
@@ -33,15 +36,13 @@
             </div>
             <div class="mb-2">
                 <h5>{% trans "Email" %}</h5>
-                <div class="small text-muted">{% trans "Backend" %}: {{ email_backend }}</div>
-                {% if email_backend == 'django.core.mail.backends.smtp.EmailBackend' %}
-                    {% if smtp_configured %}
-                    <span class="badge bg-success">{% trans "SMTP configured" %}</span>
-                    {% else %}
-                    <span class="badge bg-warning text-dark">{% trans "SMTP not configured" %}</span>
-                    {% endif %}
+                <div class="small text-muted">{{ email_status }}</div>
+                {% if 'SMTP Configured' in email_status %}
+                <span class="badge bg-success">{% trans "Ready" %}</span>
+                {% elif 'SMTP Not Configured' in email_status %}
+                <span class="badge bg-warning text-dark">{% trans "Needs Configuration" %}</span>
                 {% else %}
-                <span class="badge bg-secondary">{% trans "Console backend" %}</span>
+                <span class="badge bg-secondary">{% trans "Console Mode" %}</span>
                 {% endif %}
             </div>
         </div>
