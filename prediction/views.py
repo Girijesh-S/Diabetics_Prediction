@@ -114,7 +114,22 @@ def predict_view(request):
                         'form': PredictionForm(),
                     })
                 else:
-                    # Show prediction without saving to database for unauthenticated users
+                    # Create temporary prediction object for anonymous users to get personalized advice
+                    temp_pred = Prediction(
+                        user=None,
+                        pregnancies=data['Pregnancies'],
+                        glucose=data['Glucose'],
+                        blood_pressure=data['BloodPressure'],
+                        skin_thickness=0.0,
+                        insulin=0.0,
+                        bmi=bmi,
+                        diabetes_pedigree_function=0.0,
+                        age=data['Age'],
+                        probability=result['probability'],
+                        risk_level=result['risk_level'],
+                        prediction_result=result['prediction'],
+                    )
+                    advice = get_personalized_advice(temp_pred)
                     risk_theme = {
                         'Low': 'risk-theme-low',
                         'Medium': 'risk-theme-medium',
@@ -123,7 +138,7 @@ def predict_view(request):
                     return render(request, 'prediction/predict_result.html', {
                         'result': result,
                         'prediction': None,  # No prediction object for anonymous users
-                        'advice': _('Please login to save your prediction results.'),
+                        'advice': advice,
                         'risk_theme': risk_theme,
                         'form': PredictionForm(),
                     })
@@ -155,6 +170,7 @@ def predict_ajax(request):
         }
         try:
             result = predict_diabetes(data)
+            # Save prediction for both authenticated and unauthenticated users
             pred = Prediction.objects.create(
                 user=request.user if request.user.is_authenticated else None,
                 pregnancies=data['Pregnancies'],
@@ -169,10 +185,12 @@ def predict_ajax(request):
                 risk_level=result['risk_level'],
                 prediction_result=result['prediction'],
             )
+            advice = get_personalized_advice(pred)
             return JsonResponse({
                 'success': True,
                 'result': result,
                 'prediction_id': pred.id,
+                'advice': list(advice),
             })
         except FileNotFoundError:
             return JsonResponse({'success': False, 'error': 'Model not found'}, status=500)

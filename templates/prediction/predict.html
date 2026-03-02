@@ -45,10 +45,12 @@
 
 <script>
 document.querySelectorAll('.speech-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
         const targetId = this.dataset.target;
         const input = document.getElementById(targetId);
         if (!input) {
+            console.error('Input field not found for ID:', targetId);
             return;
         }
         if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
@@ -79,22 +81,35 @@ document.querySelectorAll('.speech-btn').forEach(btn => {
             
             // Only extract number and fill input on final result
             if (isFinal) {
-                const num = transcript.replace(/[^0-9.]/g, '');
+                const num = transcript.replace(/[^0-9.]/g, '').trim();
                 if (num) {
                     input.value = num;
                     input.dispatchEvent(new Event('input', { bubbles: true }));
                     input.dispatchEvent(new Event('change', { bubbles: true }));
                     input.focus();
+                    if (preview) {
+                        preview.textContent = '✓ Entered: ' + num;
+                    }
+                } else {
+                    if (preview) {
+                        preview.textContent = '{% trans "No number detected." %}';
+                    }
                 }
             }
         };
         rec.start();
         this.querySelector('i').classList.remove('bi-mic');
         this.querySelector('i').classList.add('bi-mic-fill');
+        rec.onerror = (e) => {
+            console.error('Speech recognition error:', e.error);
+            if (preview) {
+                preview.textContent = '{% trans "Error: " %}' + e.error;
+            }
+        };
         rec.onend = () => {
             this.querySelector('i').classList.remove('bi-mic-fill');
             this.querySelector('i').classList.add('bi-mic');
-            if (preview && preview.textContent === '{% trans "Listening..." %}') {
+            if (preview && (preview.textContent === '{% trans "Listening..." %}' || preview.textContent.endsWith('...'))) {
                 preview.textContent = '{% trans "No speech detected." %}';
             }
         };
