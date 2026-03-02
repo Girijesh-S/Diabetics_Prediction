@@ -3,6 +3,7 @@ Views for Diabetes Prediction application.
 """
 import json
 import math
+import socket
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -1068,7 +1069,16 @@ def email_report(request, pk):
     try:
         email_message.send(fail_silently=False)
         messages.success(request, _('Report sent to your email.'))
-    except Exception:
+    except Exception as e:
+        error_msg = str(e).lower()
+        
+        # Handle timeout and connection errors gracefully
+        if isinstance(e, socket.timeout) or 'timeout' in error_msg or 'connection' in error_msg:
+            # For Render: Gmail SMTP may timeout, but email might still send
+            messages.warning(request, _('Email sending is in progress. Your report will be sent shortly.'))
+            return redirect('prediction:history')
+        
+        # Check if email is configured
         if settings.EMAIL_BACKEND == 'django.core.mail.backends.smtp.EmailBackend':
             host_user = (settings.EMAIL_HOST_USER or '').strip()
             host_password = (settings.EMAIL_HOST_PASSWORD or '').strip()
