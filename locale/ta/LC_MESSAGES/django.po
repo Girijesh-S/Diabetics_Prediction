@@ -100,11 +100,11 @@ msgstr "கணக்கு இல்லையா?"
 msgid "Already have an account?"
 msgstr "ஏற்கனவே கணக்கு உள்ளதா?"
 
-msgid "Get an AI-powered prediction of your diabetes risk based on clinical parameters. Our stacking ensemble model achieves 91%+ accuracy."
-msgstr "மருத்துவ அளவுருக்களின் அடிப்படையில் உங்கள் நீரிழிவு ஆபத்தின் AI இயக்க கணிப்பைப் பெறுங்கள். எங்கள் மாதிரி 91%+ துல்லியத்தை அடைகிறது."
+msgid "Get an AI-powered prediction of your diabetes risk based on clinical parameters. Our stacking ensemble model achieves 85%+ accuracy."
+msgstr "மருத்துவ அளவுருக்களின் அடிப்படையில் உங்கள் நீரிழிவு ஆபத்தின் AI இயக்க கணிப்பைப் பெறுங்கள். எங்கள் மாதிரி 85%+ துல்லியத்தை அடைகிறது."
 
-msgid "91%+ Accurate ML Model"
-msgstr "91%+ துல்லியமான ML மாதிரி"
+msgid "85%+ Accurate ML Model"
+msgstr "85%+ துல்லியமான ML மாதிரி"
 
 msgid "Save & Track History"
 msgstr "வரலாற்றை சேமித்து கண்காணிக்கவும்"

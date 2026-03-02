@@ -100,8 +100,8 @@ msgstr "खाता नहीं है?"
 msgid "Already have an account?"
 msgstr "पहले से खाता है?"
 
-msgid "Get an AI-powered prediction of your diabetes risk based on clinical parameters. Our stacking ensemble model achieves 91%+ accuracy."
-msgstr "क्लिनिकल मापदंडों के आधार पर अपने मधुमेह जोखिम की AI-संचालित भविष्यवाणी प्राप्त करें। हमारा मॉडल 91%+ सटीकता प्राप्त करता है।"
+msgid "Get an AI-powered prediction of your diabetes risk based on clinical parameters. Our stacking ensemble model achieves 85%+ accuracy."
+msgstr "क्लिनिकल मापदंडों के आधार पर अपने मधुमेह जोखिम की AI-संचालित भविष्यवाणी प्राप्त करें। हमारा मॉडल 85%+ सटीकता प्राप्त करता है।"
 
 msgid "91%+ Accurate ML Model"
 msgstr "91%+ सटीक एमएल मॉडल"
