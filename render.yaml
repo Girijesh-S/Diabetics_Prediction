@@ -35,8 +35,6 @@ services:
         value: "Happylife@15"
       - key: DEFAULT_FROM_EMAIL
         value: "g0300747@gmail.com"
-      - key: EMAIL_USE_TLS
-        value: "False"
       - key: EMAIL_TIMEOUT
         value: "30"
 
