@@ -22,17 +22,17 @@ services:
       - key: EMAIL_BACKEND
         value: "django.core.mail.backends.smtp.EmailBackend"
       - key: EMAIL_HOST
-        value: "smtp.mailgun.org"
+        value: "smtp.gmail.com"
       - key: EMAIL_PORT
-        value: "465"
+        value: "587"
       - key: EMAIL_USE_TLS
-        value: "False"
-      - key: EMAIL_USE_SSL
         value: "True"
+      - key: EMAIL_USE_SSL
+        value: "False"
       - key: EMAIL_HOST_USER
-        value: "dbp@sandbox0f8ba03a66144746879546f692acd231.mailgun.org"
+        value: "g0300747@gmail.com"
       - key: EMAIL_HOST_PASSWORD
-        value: "Happylife@15"
+        value: "your-gmail-app-password-here"
       - key: DEFAULT_FROM_EMAIL
         value: "g0300747@gmail.com"
       - key: EMAIL_TIMEOUT

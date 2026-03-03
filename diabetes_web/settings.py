@@ -102,16 +102,16 @@ LOGOUT_REDIRECT_URL = 'prediction:home'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-# Email configuration - Using SMTP for now
-# If using Mailgun HTTP API backend, change EMAIL_BACKEND to 'prediction.mailgun_backend.MailgunEmailBackend'
-# and set EMAIL_HOST_PASSWORD to your Mailgun API key (from https://mailgun.com/app/dashboard)
+# Email configuration - Using Gmail SMTP
+# For Gmail, you need to use an App Password (not your regular Google password)
+# Get App Password: https://myaccount.google.com → Security → App passwords
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_HOST = env('EMAIL_HOST', default='smtp.mailgun.org')
-EMAIL_PORT = env.int('EMAIL_PORT', default=465)
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=False)
-EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=True)
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='dbp@sandbox0f8ba03a66144746879546f692acd231.mailgun.org').strip()
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='').strip()
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = env.int('EMAIL_PORT', default=587)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=False)
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='g0300747@gmail.com').strip()
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='').strip()  # Gmail App Password
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='g0300747@gmail.com').strip()
 EMAIL_TIMEOUT = 30  # seconds
 
