@@ -22,15 +22,15 @@ services:
       - key: EMAIL_BACKEND
         value: "django.core.mail.backends.smtp.EmailBackend"
       - key: EMAIL_HOST
-        value: "smtp.gmail.com"
+        value: "smtp.mailgun.org"
       - key: EMAIL_PORT
         value: "587"
       - key: EMAIL_USE_TLS
         value: "True"
       - key: EMAIL_HOST_USER
-        value: "g0300747@gmail.com"
+        value: "postmaster@sandboxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.mailgun.org"
       - key: EMAIL_HOST_PASSWORD
-        value: "yego tbou ykke bgqd"
+        value: "your-mailgun-api-key"
       - key: DEFAULT_FROM_EMAIL
         value: "g0300747@gmail.com"
 

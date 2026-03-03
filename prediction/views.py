@@ -115,8 +115,8 @@ def predict_view(request):
                         'form': PredictionForm(),
                     })
                 else:
-                    # Create temporary prediction object for anonymous users to get personalized advice
-                    temp_pred = Prediction(
+                    # Save prediction for anonymous users too (user=None)
+                    pred = Prediction.objects.create(
                         user=None,
                         pregnancies=data['Pregnancies'],
                         glucose=data['Glucose'],
@@ -130,15 +130,15 @@ def predict_view(request):
                         risk_level=result['risk_level'],
                         prediction_result=result['prediction'],
                     )
-                    advice = get_personalized_advice(temp_pred)
+                    advice = get_personalized_advice(pred)
                     risk_theme = {
                         'Low': 'risk-theme-low',
                         'Medium': 'risk-theme-medium',
                         'High': 'risk-theme-high',
-                    }.get(result['risk_level'], 'risk-theme-medium')
+                    }.get(pred.risk_level, 'risk-theme-medium')
                     return render(request, 'prediction/predict_result.html', {
                         'result': result,
-                        'prediction': None,  # No prediction object for anonymous users
+                        'prediction': pred,
                         'advice': advice,
                         'risk_theme': risk_theme,
                         'form': PredictionForm(),
