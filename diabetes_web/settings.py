@@ -102,16 +102,10 @@ LOGOUT_REDIRECT_URL = 'prediction:home'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-# Email configuration - Using Gmail SMTP
-EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
-EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_PORT = env.int('EMAIL_PORT', default=587)
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
-EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=False)
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='g0300747@gmail.com').strip()
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='').strip()  # Gmail App Password
+# Email configuration - Using SendGrid (works reliably on Render)
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='prediction.sendgrid_backend.SendgridBackend')
+SENDGRID_API_KEY = env('SENDGRID_API_KEY', default='')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='g0300747@gmail.com').strip()
-EMAIL_TIMEOUT = 30  # seconds
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

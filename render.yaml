@@ -20,23 +20,11 @@ services:
       - key: MODEL_STRICT_MODE
         value: "True"
       - key: EMAIL_BACKEND
-        value: "django.core.mail.backends.smtp.EmailBackend"
-      - key: EMAIL_HOST
-        value: "smtp.gmail.com"
-      - key: EMAIL_PORT
-        value: "587"
-      - key: EMAIL_USE_TLS
-        value: "True"
-      - key: EMAIL_USE_SSL
-        value: "False"
-      - key: EMAIL_HOST_USER
-        value: "g0300747@gmail.com"
-      - key: EMAIL_HOST_PASSWORD
-        value: "your-gmail-app-password-here"
+        value: "prediction.sendgrid_backend.SendgridBackend"
+      - key: SENDGRID_API_KEY
+        value: "${SENDGRID_API_KEY}"
       - key: DEFAULT_FROM_EMAIL
         value: "g0300747@gmail.com"
-      - key: EMAIL_TIMEOUT
-        value: "30"
 
 databases:
   - name: diabetes-db
