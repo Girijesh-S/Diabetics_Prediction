@@ -230,25 +230,55 @@ def predict_diabetes(patient_data):
 
     probability = float(model.predict_proba(row_scaled)[0, 1])
     
-    # ── Clinical Severity Boost for Extreme Cases ──────────────────────────
-    # If multiple severe clinical markers are present, boost the probability
-    # to better capture extreme/severe diabetic cases
-    severe_markers = 0
-    if available["Glucose"].iloc[0] >= 200:  # Severe hyperglycemia
-        severe_markers += 1
-    if available["BMI"].iloc[0] >= 35:  # Severe obesity
-        severe_markers += 1
-    if available["BloodPressure"].iloc[0] >= 90:  # High BP
-        severe_markers += 1
-    if available["Pregnancies"].iloc[0] >= 6:  # Multiple pregnancies
-        severe_markers += 1
+    # ── Clinical Calibration: Apply medical knowledge thresholds ──────────────
+    # If model probability seems too low despite clinical risk factors, boost it
+    glucose_val = available["Glucose"].iloc[0]
+    bmi_val = available["BMI"].iloc[0]
+    age_val = available["Age"].iloc[0]
+    bp_val = available["BloodPressure"].iloc[0]
+    preg_val = available["Pregnancies"].iloc[0]
     
-    # If multiple severe markers present and model is uncertain, boost probability
-    if severe_markers >= 3 and 0.3 <= probability <= 0.7:
-        # This is a case with multiple red flags but model isn't decisive
-        # Boost towards diabetic prediction with clinical confidence
-        boosted_prob = min(0.95, probability + (severe_markers - 2) * 0.15)
-        probability = boosted_prob
+    # Medical calibration rules:
+    # - Fasting Glucose 126+: Diabetic threshold (probability >= 0.80)
+    # - Fasting Glucose 100-125: Prediabetic (probability >= 0.40)
+    # - Glucose 100-150 + BMI 25+: Moderate risk (probability >= 0.30)
+    # - Glucose 150+: High risk (probability >= 0.60)
+    
+    if glucose_val >= 126:
+        # Diagnostic diabetic glucose level
+        probability = max(probability, 0.80)
+    elif glucose_val >= 100:
+        # Prediabetic range - ensure clinical significance
+        if bmi_val >= 25:
+            # Prediabetic + overweight
+            probability = max(probability, 0.40)
+        else:
+            # Prediabetic alone
+            probability = max(probability, 0.30)
+    elif glucose_val >= 150:
+        # High glucose even if not quite diagnostic
+        probability = max(probability, 0.60)
+    
+    # Additional boost for multiple risk factors
+    risk_factors = 0
+    if glucose_val > 100:
+        risk_factors += 1
+    if bmi_val > 30:
+        risk_factors += 1
+    if age_val > 45:
+        risk_factors += 1
+    if bp_val > 80:
+        risk_factors += 1
+    if preg_val > 3:
+        risk_factors += 1
+    
+    # If 3+ risk factors, ensure moderate probability
+    if risk_factors >= 3 and probability < 0.35:
+        probability = 0.35
+    
+    # Severe hyperglycemia always gets high probability
+    if glucose_val >= 200:
+        probability = max(probability, 0.85)
     
     prediction = int(probability >= threshold)
 
