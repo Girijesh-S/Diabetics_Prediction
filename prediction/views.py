@@ -3,18 +3,16 @@ Views for Diabetes Prediction application.
 """
 import json
 import math
-import socket
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView
+from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST, require_GET
 from django.utils import timezone
 from django.utils.translation import gettext as _
-from django.core.mail import EmailMessage, get_connection
 from django.conf import settings
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -994,110 +992,6 @@ def pdf_report(request, pk):
 def train_model_info(request):
     """Page explaining how to train the model."""
     return render(request, 'prediction/train_info.html')
-
-
-@login_required
-def email_report(request, pk):
-    """Email prediction report to user."""
-    pred = Prediction.objects.filter(pk=pk, user=request.user).first()
-    if not pred:
-        messages.error(request, _('Report not found for this prediction.'))
-        return redirect('prediction:history')
-    if not request.user.email:
-        messages.warning(request, _('Add your email in profile to receive reports.'))
-        return redirect('prediction:history')
-    
-    # Generate advice ONCE so PDF and email body have the same recommendations
-    advice = get_personalized_advice(pred)
-    visit_dt = timezone.localtime(pred.predicted_at).strftime('%d-%m-%Y %H:%M')
-    user_display = request.user.get_full_name().strip() or request.user.username
-
-    # Risk colour for email
-    risk_color = {'Low': '#059669', 'Medium': '#d97706', 'High': '#dc2626'}.get(pred.risk_level, '#1b6ef3')
-
-    # HTML email body with bold date and risk details
-    advice_list = ''.join(f'<li style="margin-bottom:4px;">{t}</li>' for t in advice)
-    html_body = f"""
-    <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:20px;">
-        <h2 style="color:#1e40af;">Diabetes Risk Assessment Report</h2>
-        <p>Dear <strong>{user_display}</strong>,</p>
-        <p>Here are your prediction details:</p>
-        <table style="border-collapse:collapse;width:100%;margin:12px 0;">
-            <tr>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;background:#f8fafc;"><strong>Visit Date</strong></td>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;"><strong>{visit_dt}</strong></td>
-            </tr>
-            <tr>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;background:#f8fafc;"><strong>Prediction</strong></td>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;"><strong>{pred.prediction_result}</strong></td>
-            </tr>
-            <tr>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;background:#f8fafc;"><strong>Risk Level</strong></td>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;"><strong style="color:{risk_color};font-size:16px;">{pred.risk_level}</strong></td>
-            </tr>
-            <tr>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;background:#f8fafc;"><strong>Probability</strong></td>
-                <td style="padding:8px 12px;border:1px solid #e2e8f0;"><strong>{pred.probability * 100:.1f}%</strong></td>
-            </tr>
-        </table>
-        <h3 style="color:#1e40af;margin-top:16px;">Personalized Health Advice</h3>
-        <ol style="padding-left:20px;">{advice_list}</ol>
-        <hr style="border:none;border-top:1px solid #e2e8f0;margin:16px 0;">
-        <p style="font-size:12px;color:#64748b;">This report is generated for educational purposes. Always consult a qualified healthcare professional for medical decisions.</p>
-        <p style="font-size:12px;color:#64748b;">The detailed PDF report is attached.</p>
-    </div>
-    """
-
-    email_message = EmailMessage(
-        subject=_('Your Diabetes Risk Report - %(name)s') % {'name': user_display},
-        body=html_body,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[request.user.email],
-    )
-    email_message.content_subtype = 'html'
-
-    report_name = f'Diabetes_Risk_Report_{user_display.replace(" ", "_")}'
-    filename = f"{report_name}.pdf"
-    # Pass the SAME advice list so PDF recommendations match the email body
-    pdf_bytes = build_pdf_bytes(pred, request.user, include_dashboard=False, advice=advice)
-    email_message.attach(filename, pdf_bytes, 'application/pdf')
-
-    if settings.EMAIL_BACKEND == 'django.core.mail.backends.console.EmailBackend':
-        messages.error(request, _('Email backend is console. No email was sent. Configure SMTP in .env.'))
-        return redirect('prediction:history')
-
-    try:
-        email_message.send(fail_silently=False)
-        messages.success(request, _('Report sent to your email.'))
-    except Exception as e:
-        import sys
-        error_msg = str(e).lower()
-        print(f"\n❌ EMAIL ERROR: {type(e).__name__}: {str(e)}", file=sys.stderr)
-        print(f"Error message (lowercase): {error_msg}", file=sys.stderr)
-        
-        # Handle timeout and connection errors gracefully
-        if isinstance(e, socket.timeout) or 'timeout' in error_msg or 'connection' in error_msg:
-            # For Render: Gmail SMTP may timeout, but email might still send
-            print(f"⚠️  Timeout/Connection error detected. User will see 'in progress' message.", file=sys.stderr)
-            messages.warning(request, _('Email sending is in progress. Your report will be sent shortly.'))
-            return redirect('prediction:history')
-        
-        # Check if email is configured
-        if settings.EMAIL_BACKEND == 'django.core.mail.backends.smtp.EmailBackend':
-            host_user = (settings.EMAIL_HOST_USER or '').strip()
-            host_password = (settings.EMAIL_HOST_PASSWORD or '').strip()
-            if not host_user or not host_password:
-                messages.error(request, _('Email is not configured. Set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in .env.'))
-                return redirect('prediction:history')
-
-        try:
-            console_connection = get_connection('django.core.mail.backends.console.EmailBackend')
-            email_message.connection = console_connection
-            email_message.send(fail_silently=False)
-            messages.warning(request, _('SMTP email failed. Report was printed to server logs using console backend.'))
-        except Exception:
-            messages.error(request, _('Failed to send email. Check email configuration.'))
-    return redirect('prediction:history')
 
 
 def set_language(request):

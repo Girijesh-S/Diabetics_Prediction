@@ -31,7 +31,6 @@
                     <td>{% widthratio p.probability 1 100 %}%</td>
                     <td>
                         <a href="/report/{{ p.pk }}/pdf/" class="btn btn-sm btn-outline-primary" title="{% trans 'Download PDF' %}"><i class="bi bi-file-pdf"></i></a>
-                        <a href="/report/{{ p.pk }}/email/" class="btn btn-sm btn-outline-secondary" title="{% trans 'Email report' %}"><i class="bi bi-envelope"></i></a>
                     </td>
                 </tr>
                 {% empty %}
