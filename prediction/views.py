@@ -1070,11 +1070,15 @@ def email_report(request, pk):
         email_message.send(fail_silently=False)
         messages.success(request, _('Report sent to your email.'))
     except Exception as e:
+        import sys
         error_msg = str(e).lower()
+        print(f"\n❌ EMAIL ERROR: {type(e).__name__}: {str(e)}", file=sys.stderr)
+        print(f"Error message (lowercase): {error_msg}", file=sys.stderr)
         
         # Handle timeout and connection errors gracefully
         if isinstance(e, socket.timeout) or 'timeout' in error_msg or 'connection' in error_msg:
             # For Render: Gmail SMTP may timeout, but email might still send
+            print(f"⚠️  Timeout/Connection error detected. User will see 'in progress' message.", file=sys.stderr)
             messages.warning(request, _('Email sending is in progress. Your report will be sent shortly.'))
             return redirect('prediction:history')
         
