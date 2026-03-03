@@ -111,8 +111,8 @@ EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=False)
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='').strip()
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='').strip()
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='').strip()
-# Timeout for SMTP connection (prevents indefinite hanging on Render)
-EMAIL_TIMEOUT = 10  # seconds
+# Timeout for SMTP connection (30 seconds for Render reliability)
+EMAIL_TIMEOUT = 30  # seconds
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
