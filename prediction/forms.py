@@ -98,7 +98,7 @@ class SurveyForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Your full name')})
     )
     age = forms.IntegerField(
-        min_value=1, max_value=120,
+        min_value=5, max_value=120,
         label=_('Age'),
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': _('Your age in years')})
     )
@@ -118,12 +118,12 @@ class SurveyForm(forms.Form):
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': _('Weight in kilograms')})
     )
     glucose = forms.FloatField(
-        min_value=0, max_value=300,
+        min_value=50, max_value=300,
         label=_('Glucose Level (mg/dL)'),
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': _('Fasting glucose level')})
     )
     blood_pressure = forms.FloatField(
-        min_value=0, max_value=200,
+        min_value=40, max_value=200,
         label=_('Blood Pressure (mmHg)'),
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': _('Systolic blood pressure')})
     )
@@ -132,3 +132,34 @@ class SurveyForm(forms.Form):
         label=_('Diabetes Diagnosis'),
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+    
+    def clean_blood_pressure(self):
+        """Validate blood pressure is not 0 or unrealistic."""
+        bp = self.cleaned_data.get('blood_pressure')
+        if bp == 0:
+            raise forms.ValidationError(_('Blood Pressure cannot be 0. Please enter a realistic value (40-200 mmHg).'))
+        if bp < 40 or bp > 200:
+            raise forms.ValidationError(_('Blood Pressure should be between 40-200 mmHg.'))
+        return bp
+    
+    def clean_glucose(self):
+        """Validate glucose is realistic."""
+        glucose = self.cleaned_data.get('glucose')
+        if glucose < 50 or glucose > 300:
+            raise forms.ValidationError(_('Glucose should be between 50-300 mg/dL.'))
+        return glucose
+    
+    def clean(self):
+        """Additional cross-field validation."""
+        cleaned_data = super().clean()
+        height = cleaned_data.get('height')
+        weight = cleaned_data.get('weight')
+        
+        # Validate reasonable height-weight ratio
+        if height and weight:
+            height_m = height / 100.0
+            bmi = weight / (height_m ** 2)
+            if bmi < 10 or bmi > 60:
+                raise forms.ValidationError(_('Height and weight combination appears unrealistic. Please check your values.'))
+        
+        return cleaned_data
